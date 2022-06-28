@@ -1,12 +1,21 @@
 import librosa
+import librosa.display
 import numpy as np
+import matplotlib.pyplot as plt
 
-# temp input until user recording can be processed
+# TODO: read file from audio_files folder
+
 # monophonic example audio
 filename = librosa.example('trumpet')
 
 y, sr = librosa.load(filename)
 print(y, end='\n')
 
-D = np.abs(librosa.stft(y))
+D = librosa.stft(y)
 print(D, end='\n')
+S_db = librosa.amplitude_to_db(np.abs(D), ref=np.max)
+
+plt.figure()
+librosa.display.specshow(S_db)
+plt.colorbar()
+plt.show()
