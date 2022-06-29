@@ -3,7 +3,7 @@
 
 ## What the rule controls:  
 
-The rule controls the types of intervals that make up the chords <br>
+The rule controls the types of intervals that can make up the chords <br>
 
 ## Levels:
 
