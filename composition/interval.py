@@ -1,3 +1,7 @@
+#importing pitch class set module (pcsets)
+import pcsets as ps
+from pcsets import pcset
+
 #creating variables for interval rule
 intervalLengths = [3,4] #initializes possible interval lengths (in half steps) [minor 3rd or major 3rd is default]
 
@@ -9,3 +13,4 @@ def intUp(intervalLength,note):
 def intDown(intervalLength,note):
     pass
 
+#checks that the chord matches the current interval rules
