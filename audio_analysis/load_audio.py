@@ -3,19 +3,24 @@ import librosa.display
 import numpy as np
 import matplotlib.pyplot as plt
 
-# TODO: read file from audio_files folder
-
 # monophonic example audio
-filename = librosa.example('trumpet')
-
+filename = librosa.ex('trumpet')
 y, sr = librosa.load(filename)
-print(y, end='\n')
 
-D = librosa.stft(y)
-print(D, end='\n')
-S_db = librosa.amplitude_to_db(np.abs(D), ref=np.max)
+n_fft = 2048
 
-plt.figure()
-librosa.display.specshow(S_db)
-plt.colorbar()
+freqs = librosa.fft_frequencies(sr=sr, n_fft=n_fft)
+freqs_mHz = [i / 1000 for i in freqs]
+
+S = np.abs(librosa.stft(y))
+
+print(S)
+print(freqs)
+
+# frequency domain graph of n-th frequency bin
+n = 1
+
+plt.plot(freqs_mHz, S[:, n])
+plt.xlabel('Frequency (Hz)')
+plt.ylabel('Magnitude')
 plt.show()
