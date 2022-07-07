@@ -1,13 +1,7 @@
-from sharedtone import *
-from numnotes import *
-from interval import *
-
 #make new rule class
 class rules:
-    def __init__(self,intervalRule,sharedRule,numNotesRule):
-        self.intervalRule = intervalRule
-        self.sharedRule = sharedRule
-        self.numNotesRule = numNotesRule
+    def __init__(self,cutoff):
+        self.cutoff = cutoff
 
     #finds the order of priority for the rules
     def getPriority(self):
@@ -16,7 +10,14 @@ class rules:
 
 
     #creates a list of possible chords that fit the rules
-    def getPossibleChords(previousChord):
+    def getPossibleChords(self):
         pass
+
+    def getPreviousChord():
+        pass
+
+    def getCurrentNote():
+        pass
+    
 
 

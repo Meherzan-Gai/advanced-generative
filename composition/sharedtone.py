@@ -1,8 +1,16 @@
-#initializing variables
-numShared = 1
-#find the number of shared notes between two chords
-def numSharedBetween(chord1,chord2):
-    pass
+from rules import rules
 
-def findShared(chord1,chord2):
-    pass
+
+class sharedTone(rules):
+    def __init__(self,numShared):
+        self.numShared = numShared
+    
+    def getChords(self):
+        pass
+
+    #find the number of shared notes between two chords
+    def numSharedBetween(chord1,chord2):
+        pass
+
+    def findShared(chord1,chord2):
+        pass
