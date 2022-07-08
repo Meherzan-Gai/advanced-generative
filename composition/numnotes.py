@@ -1,4 +1,4 @@
-from rules import rules
+import rules
 
 class numNotes(rules):
     def __init__(self,notesAmount):

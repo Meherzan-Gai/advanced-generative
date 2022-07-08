@@ -1,5 +1,6 @@
+import composer
 #make new rule class
-class rules:
+class rules():
     def __init__(self):
         pass
 
@@ -18,8 +19,6 @@ class rules:
         pass
 
     @staticmethod
-    def getCurrentNote():
-        return 
-    
-
+    def getPitch():
+        pass 
 

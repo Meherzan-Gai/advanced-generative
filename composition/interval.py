@@ -1,7 +1,7 @@
 #importing pitch class set module (pcsets)
 import pcsets as ps
 from pcsets import pcset
-from rules import rules
+import rules
 
 class interval(rules):
     

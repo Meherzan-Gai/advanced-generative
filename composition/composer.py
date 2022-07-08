@@ -18,3 +18,6 @@ class composer:
     #function to output the chord progression chosen by the user
     def outputChords(fileFormat):
         pass
+    
+    def getPitch(self):
+        return self.pitches
