@@ -1,4 +1,3 @@
-import composer
 #make new rule class
 class rules():
     def __init__(self):
@@ -11,8 +10,8 @@ class rules():
 
     #creates a list of possible chords that fit the rules
     @staticmethod
-    def getPossibleChords():
-        pass
+    def getPossibleChords(pitchIn,previousChord):
+        return "F"+pitchIn+"C"
 
     @staticmethod
     def getPreviousChord():
