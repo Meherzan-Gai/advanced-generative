@@ -1,22 +1,48 @@
 #import rules file
-from rules import *
+
+from progression import Progression
+from chord import Chord
 #make class
-class composer:
+class Composer:
     
     #init function
-    def __init__(self,pitches):
+    def __init__(self,pitches, rules):
         self.pitches=pitches
-        self.progression =[]
-        self.currentPitchIndex = 0
-        self.ruleSet = rules(pitches,self.progression)
+        self.rules = rules # a list of rule 
+        self.progressions = [] # holds instances of progressions
+
+        # self.currentPitchIndex = 0
 
 
     #generate chord progression function
-    def makeChordProgression(self):
-        self.getFirstChord(self.ruleSet.getPitch())
-        while self.currentPitchIndex <= len(self.pitches):
-            self.getChord(self.ruleSet.getPitch(),self.ruleSet.getPreviousChord())
-        return self.progression
+    def makeChordProgression(self):        
+        pitchIdx = 0
+        activeProgressions = []
+        while pitchIdx < len(self.pitches):
+            nextProgressions = []
+            if len(activeProgressions) == 0:
+                for rule in self.rules:
+                    possibleChords = rule.getPossibleChords(
+                        pitchIdx=pitchIdx,
+                        pitch=self.pitches[pitchIdx],
+                    )
+                    for chord in possibleChords:
+                        nextProgressions.append(Progression([chord]))
+            else:
+                for progression in activeProgressions:
+                    for rule in self.rules:
+                        possibleChords = rule.getPossibleChords(
+                            pitchIdx=pitchIdx,
+                            pitch=self.pitches[pitchIdx],
+                            progression=progression
+                        )
+                    for chord in possibleChords:
+                        nextProgressions.append(progression.append(chord))
+
+            activeProgressions = nextProgressions
+            pitchIdx += 1
+            # self.getChord(self.ruleSet.getPitch(),self.ruleSet.getPreviousChord())
+        return self.progressions
 
     #helper function for first chord
     def getFirstChord(self,pitchIn):
@@ -49,5 +75,5 @@ class composer:
 
 
 #testing
-obj = composer(["A","B","C","D","E","F"])
-obj.makeChordProgression()
+# obj = composer(["A","B","C","D","E","F"])
+# obj.makeChordProgression()

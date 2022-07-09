@@ -1,4 +1,4 @@
-from rules import rules
+from composition.rules.base import rules
 
 class numNotes(rules):
     def __init__(self,pitches,progression,notesAmount):
