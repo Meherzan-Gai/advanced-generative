@@ -1,9 +1,12 @@
 #make new rule interface
-class rules():
+class rules(object):
+   #def __new__(cls, *args, **kwargs):
+
     def __init__(self,pitches,progression):
         self.pitches = pitches
         self.progression = progression
         self.countPitchIndex = 0
+        self.allInstances = []
 
     #finds the order of priority for the rules
     def getPriority():
@@ -11,7 +14,8 @@ class rules():
 
     #creates a list of possible chords that fit the rules
     def getPossibleChords(self,pitchIn,previousChord):
-        self.countPitchIndex+=1
+        for instance in self.allInstances:
+            instance.getChords()
         return ["F",pitchIn,"C"]
 
     def getPreviousChord(self):

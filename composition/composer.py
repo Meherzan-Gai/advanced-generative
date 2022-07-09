@@ -9,6 +9,7 @@ class composer:
         self.progression =[]
         self.currentPitchIndex = 0
         self.ruleSet = rules(pitches,self.progression)
+        
 
     #generate chord progression function
     def makeChordProgression(self):
@@ -43,6 +44,7 @@ class composer:
     def outputChords(self,fileFormat):
         pass
     
+
    
 
 

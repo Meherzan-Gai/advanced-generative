@@ -7,10 +7,12 @@ class interval(rules):
     
     def __init__(self,pitches,progression,intervalLengths):
         super().__init__(pitches,progression)
+        super().allInstances.append(self)
         self.intintervalLengths = intervalLengths
     
     def getChords(self):
-        pass
+        print("interval test")
+        
     #finds the notes one interval distance above the current note with all the possible interval lengths
     def intUp(intervalLength,note):
         pass
