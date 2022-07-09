@@ -1,12 +1,8 @@
-#importing pitch class set module (pcsets)
-# import pcsets as ps
-# from pcsets import pcset
 from rules.base import Rule
 
 class Interval(Rule):
-    def __init__(self,pitches,progression,intervalLengths):
-        super().__init__(pitches,progression)
-        super().allInstances.append(self)
+    def __init__(self):
+        super().__init__()
         self.intintervalLengths = intervalLengths
     
     #gets chords that work for the rule
