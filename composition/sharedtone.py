@@ -1,8 +1,9 @@
-import rules
+from rules import rules
 
 
 class sharedTone(rules):
-    def __init__(self,numShared):
+    def __init__(self,pitches,progression,numShared):
+        super().__init__(pitches,progression)
         self.numShared = numShared
     
     def getChords(self):

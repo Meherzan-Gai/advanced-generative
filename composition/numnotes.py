@@ -1,7 +1,8 @@
-import rules
+from rules import rules
 
 class numNotes(rules):
-    def __init__(self,notesAmount):
+    def __init__(self,pitches,progression,notesAmount):
+        super().__init__(pitches,progression)
         self.notesAmount = notesAmount
 
     #returns the possible chords that fit this rule
