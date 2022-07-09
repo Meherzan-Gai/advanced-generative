@@ -5,6 +5,11 @@ class Chord:
         self.stack = stack
         # e.g stack = [60, 64, 67]
 
-    def shardPitches(self, c2):
+    def sharedPitches(self, c2):
         # c2 is a Chord instance
-        pass
+        total = 0
+        for pitch in self.stack:
+            for otherPitch in c2.stack:
+                if pitch == otherPitch:
+                    total+=1
+        return total
