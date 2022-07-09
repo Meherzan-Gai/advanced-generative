@@ -1,23 +1,25 @@
 #make new rule class
 class rules():
-    def __init__(self):
-        pass
+    def __init__(self,pitches,progression):
+        self.pitches = pitches
+        self.progression = progression
+        self.countPitchIndex = 0
+
+    def updateProgression(self,newChord):
+        self.progression.append(newChord)
 
     #finds the order of priority for the rules
-    @staticmethod
     def getPriority():
         pass
 
     #creates a list of possible chords that fit the rules
-    @staticmethod
-    def getPossibleChords(pitchIn,previousChord):
-        return "F"+pitchIn+"C"
+    def getPossibleChords(self,pitchIn,previousChord):
+        self.countPitchIndex+=1
+        return ["F",pitchIn,"C"]
 
-    @staticmethod
-    def getPreviousChord():
-        pass
+    def getPreviousChord(self):
+        return self.progression[self.countPitchIndex]
 
-    @staticmethod
-    def getPitch():
-        pass 
+    def getPitch(self):
+        return self.pitches[self.countPitchIndex]
 

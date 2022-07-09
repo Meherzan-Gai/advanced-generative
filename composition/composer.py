@@ -6,23 +6,31 @@ class composer:
     #init function
     def __init__(self,pitches):
         self.pitches=pitches
-        self.progression =["A"]
+        self.progression =[]
         self.currentPitchIndex = 0
+        self.ruleSet = rules(pitches,self.progression)
 
     #generate chord progression function
     def makeChordProgression(self):
-        self.getFirstChord(self.pitches[self.currentPitchIndex])
-        while self.currentPitchIndex < len(self.pitches):
-            self.getChord(self.pitches[self.currentPitchIndex],self.progression[len(self.progression)-1])
+        self.getFirstChord(self.ruleSet.getPitch())
+        while self.currentPitchIndex <= len(self.pitches):
+            self.getChord(self.ruleSet.getPitch(),self.ruleSet.getPreviousChord())
         return self.progression
 
     #helper function for first chord
     def getFirstChord(self,pitchIn):
+        newChord = pitchIn #CHANGE THIS LATER (PLACEHOLDER)
+        self.progression.append(newChord)
+        print(self.progression)
         self.currentPitchIndex+=1
+
 
     #helper function to generate a chord (calls the rule class to get chords)
     def getChord(self,pitchIn,previousChord):
-        self.progression.append(rules.getPossibleChords(pitchIn,previousChord))
+        newChord = self.ruleSet.getPossibleChords(pitchIn,previousChord)
+        self.progression.append(newChord)
+        print()
+        print(self.progression)
         self.currentPitchIndex+=1
 
 
@@ -35,11 +43,9 @@ class composer:
     def outputChords(self,fileFormat):
         pass
     
-    #function to get the current pitch
-    def getPitch(self):
-        return self.pitches[self.currentPitchIndex]
+   
+
 
 #testing
 obj = composer(["A","B","C","D","E","F"])
 obj.makeChordProgression()
-obj.showChordsList()
