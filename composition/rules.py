@@ -1,12 +1,9 @@
-#make new rule class
+#make new rule interface
 class rules():
     def __init__(self,pitches,progression):
         self.pitches = pitches
         self.progression = progression
         self.countPitchIndex = 0
-
-    def updateProgression(self,newChord):
-        self.progression.append(newChord)
 
     #finds the order of priority for the rules
     def getPriority():
