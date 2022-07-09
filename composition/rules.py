@@ -16,7 +16,7 @@ class rules(object):
     def getPossibleChords(self,pitchIn,previousChord):
         for instance in self.allInstances:
             instance.getChords()
-        return ["F",pitchIn,"C"]
+        return ["F",pitchIn,"C"] #PLACEHOLDER CHANGE THIS LATER
 
     def getPreviousChord(self):
         return self.progression[self.countPitchIndex]
