@@ -1,9 +1,8 @@
-from composition.rules.base import rules
+from rules.base import Rule
 
-class numNotes(rules):
-    def __init__(self,pitches,progression,notesAmount):
-        super().__init__(pitches,progression)
-        super().allInstances.append(self)
+class NumNotes(Rule):
+    def __init__(self,notesAmount):
+        super().__init__()
         self.notesAmount = notesAmount
 
     #returns the possible chords that fit this rule

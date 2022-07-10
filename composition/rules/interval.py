@@ -1,7 +1,7 @@
 from rules.base import Rule
 
 class Interval(Rule):
-    def __init__(self):
+    def __init__(self,intervalLengths):
         super().__init__()
         self.intintervalLengths = intervalLengths
     
