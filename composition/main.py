@@ -16,3 +16,4 @@ rule3 = Interval([3,4])
 ruleList = [rule1,rule2]
 composer = Composer([60, 64, 67,], ruleList)
 composer.makeChordProgression()
+composer.printProgressions()

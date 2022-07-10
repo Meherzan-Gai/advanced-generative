@@ -14,12 +14,12 @@ class NumNotes(Rule):
         if prevChord is None: # on first chord
 
             #PLACEHOLDER RETURNS MAJOR TRIAD AND MINOR SEVENTH
-            return [Chord([pitchIn,pitchIn+4,pitchIn+7]), Chord([pitchIn,pitchIn+3,pitchIn+7,pitchIn+10])]
+            return [Chord([pitchIn,pitchIn+1,pitchIn+2]), Chord([pitchIn,pitchIn+1,pitchIn+2,pitchIn+3])]
 
         else:
 
             #PLACEHOLDER RETURNS MAJOR SEVENTH AND MINOR TRIAD
-            return [Chord([pitchIn,pitchIn+4,pitchIn+7,pitchIn+11], Chord([pitchIn,pitchIn+3,pitchIn+7]))]
+            return [Chord([pitchIn,pitchIn-1,pitchIn-2,pitchIn-3], Chord([pitchIn,pitchIn-1,pitchIn-2]))]
 
 
     #findNumNotes() method in chord class finds number of notes

@@ -6,7 +6,10 @@ class Progression:
         self.chords = chords
 
     def append(self, chord): 
-        return Progression([self.chords, chord])
+        #return Progression([self.chords, chord])
+        newProgression = Progression(self.chords)
+        newProgression.chords.append(chord)
+        return newProgression
 
     def delete(self):
         pass
