@@ -21,6 +21,7 @@ class Composer:
                     possibleChords = rule.getPossibleChords(
                         pitchIdx=pitchIdx,
                         pitch=self.pitches[pitchIdx],
+                        prevChord=None
                     )
                     for chord in possibleChords:
                         nextProgressions.append(Progression([chord]))
@@ -30,14 +31,16 @@ class Composer:
                         possibleChords = rule.getPossibleChords(
                             pitchIdx=pitchIdx,
                             pitch=self.pitches[pitchIdx],
-                            progression=progression
+                            progression=progression,
+                            prevChord=progression.chords[len(progression.chords)-1]
                         )
-                    for chord in possibleChords:
-                        nextProgressions.append(progression.append(chord))
+                        for chord in possibleChords:
+                            nextProgressions.append(progression.appendChord(chord))
                     
             activeProgressions = nextProgressions
             pitchIdx += 1
             self.progressions = activeProgressions #CHANGE THIS LATER ADDED RN TO SEE RESULTS
+            self.printProgressions()
         return self.progressions
 
 

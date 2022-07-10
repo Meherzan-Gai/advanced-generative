@@ -8,7 +8,7 @@ class NumNotes(Rule):
 
     #returns the possible chords that fit this rule
     def getChords(self, **kwargs):
-        prevChord = kwargs.get("prevChords", None)
+        prevChord = kwargs.get("prevChord", None)
         pitchIn = kwargs.get("pitch")
 
         if prevChord is None: # on first chord
@@ -19,7 +19,7 @@ class NumNotes(Rule):
         else:
 
             #PLACEHOLDER RETURNS MAJOR SEVENTH AND MINOR TRIAD
-            return [Chord([pitchIn,pitchIn-1,pitchIn-2,pitchIn-3], Chord([pitchIn,pitchIn-1,pitchIn-2]))]
+            return [Chord([pitchIn,pitchIn-1,pitchIn-2,pitchIn-3]), Chord([pitchIn,pitchIn-1,pitchIn-2])]
 
 
     #findNumNotes() method in chord class finds number of notes
