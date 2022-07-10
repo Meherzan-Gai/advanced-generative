@@ -16,7 +16,7 @@ class Progression:
         for thisChord in self.chords:
             newChordList.append(thisChord)
         newChordList.append(chord)
-
         return Progression(newChordList)
+        
     def delete(self):
         pass
