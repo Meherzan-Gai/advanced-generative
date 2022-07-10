@@ -1,8 +1,7 @@
-#import rules file
-
+#imports
 from progression import Progression
 from chord import Chord
-#make class
+
 class Composer:
     
     #init function
@@ -10,9 +9,6 @@ class Composer:
         self.pitches=pitches
         self.rules = rules # a list of rule 
         self.progressions = [] # holds instances of progressions
-
-        # self.currentPitchIndex = 0
-
 
     #generate chord progression function
     def makeChordProgression(self):        
@@ -41,15 +37,7 @@ class Composer:
 
             activeProgressions = nextProgressions
             pitchIdx += 1
-            # self.getChord(self.ruleSet.getPitch(),self.ruleSet.getPreviousChord())
         return self.progressions
-
-    #helper function for first chord
-    def getFirstChord(self,pitchIn):
-        newChord = pitchIn #CHANGE THIS LATER (PLACEHOLDER)
-        self.progression.append(newChord)
-        print(self.progression)
-        self.currentPitchIndex+=1
 
 
     #helper function to generate a chord (calls the rule class to get chords)

@@ -6,7 +6,7 @@ class Interval(Rule):
         self.intintervalLengths = intervalLengths
     
     #gets chords that work for the rule
-    def getChords(self):
+    def getChords(self, **kwargs):
         print("interval test") #PLACEHOLDER CHANGE THIS LATER
         
     #finds the notes one interval distance above the current note with all the possible interval lengths

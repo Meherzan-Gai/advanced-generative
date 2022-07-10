@@ -29,3 +29,11 @@ class Chord:
     #finds and returns the interval vector of the chord
     def findIntervals(self):
         return ps(self.stack).ivec()
+
+    #finds and returns the pitch class sets that make up the chord (the pitches that make up the chord with no duplicates)
+    def findPitchSets(self):
+        return ps(self.stack)
+
+    #finds and returns the number of notes in the chord
+    def findNumNotes(self):
+        return len(self.stack)

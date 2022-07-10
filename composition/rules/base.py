@@ -1,8 +1,6 @@
-#make new rule interface
 class Rule(object):
-   #def __new__(cls, *args, **kwargs):
-    instances = []
 
+    instances = []
 
     def __init__(self):
         self.countPitchIndex = 0
