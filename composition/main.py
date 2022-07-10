@@ -14,6 +14,6 @@ rule1 = SharedTone(1)
 rule2 = NumNotes(3)
 rule3 = Interval([3,4])
 ruleList = [rule1,rule2]
-composer = Composer([60, 64, 67,], ruleList)
+composer = Composer([60, 64], ruleList)
 composer.makeChordProgression()
 composer.printProgressions()

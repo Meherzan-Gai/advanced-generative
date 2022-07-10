@@ -34,7 +34,7 @@ class Composer:
                         )
                     for chord in possibleChords:
                         nextProgressions.append(progression.append(chord))
-
+                    
             activeProgressions = nextProgressions
             pitchIdx += 1
             self.progressions = activeProgressions #CHANGE THIS LATER ADDED RN TO SEE RESULTS
