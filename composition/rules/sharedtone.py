@@ -14,7 +14,10 @@ class SharedTone(Rule):
         prevChord = kwargs.get("prevChord", None)
         pitchIn = kwargs.get("pitch")
 
-        
+    
+    def generateChords(self, prevChord, pitchIn, cutoff):
+        pass
+
     #find the number of shared notes between two chords
     def numSharedBetween(chord1,chord2):
         return chord1.numSharedPitches(chord2)
