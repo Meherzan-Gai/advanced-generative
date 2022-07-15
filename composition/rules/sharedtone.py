@@ -14,16 +14,7 @@ class SharedTone(Rule):
         prevChord = kwargs.get("prevChord", None)
         pitchIn = kwargs.get("pitch")
 
-        if prevChord is None: # on first chord
-
-            #PLACEHOLDER RETURNS MAJOR TRIAD AND MINOR SEVENTH
-            return [Chord([pitchIn,pitchIn+4,pitchIn+7]), Chord([pitchIn,pitchIn+3,pitchIn+7,pitchIn+10])]
-
-        else:
-
-            #PLACEHOLDER RETURNS MAJOR SEVENTH AND MINOR TRIAD
-            return [Chord([pitchIn,pitchIn+4,pitchIn+7,pitchIn+11]), Chord([pitchIn,pitchIn+3,pitchIn+7])]
-
+        
     #find the number of shared notes between two chords
     def numSharedBetween(chord1,chord2):
         return chord1.numSharedPitches(chord2)

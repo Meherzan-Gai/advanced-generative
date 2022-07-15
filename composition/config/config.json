@@ -1,6 +1,17 @@
 {
     "SharedTone": {
-        "options" : [0,1,2,3,4]
+        "options" : [0,1,2,3,4,5],
+        "numShared": 1
+
+    },
+
+    "NumNotes": {
+        "numNotes": 3
+
+    },
+
+    "Interval": {
+        "intervals":[false,false,true,true,true,false]
 
     }
 }
