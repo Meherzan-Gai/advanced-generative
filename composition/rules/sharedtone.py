@@ -1,7 +1,7 @@
 #imports
 from rules.base import Rule
 from chord import Chord
-
+import random
 
 class SharedTone(Rule):
     def __init__(self,numShared):
@@ -15,9 +15,10 @@ class SharedTone(Rule):
         pitchIn = kwargs.get("pitch")
 
     
-    def generateChords(self, prevChord, pitchIn, cutoff):
-        pass
+    def generateChords(self, prevChord, pitchIn, numNotes, cutoff):
+        random.randrange(1,11,1)
 
+    
     #find the number of shared notes between two chords
     def numSharedBetween(chord1,chord2):
         return chord1.numSharedPitches(chord2)
