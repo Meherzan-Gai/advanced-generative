@@ -11,7 +11,7 @@ class NumNotes(Rule):
     #returns the possible chords that fit this rule
     def getChords(self, **kwargs):
         pitchIn = kwargs.get("pitch")
-        return self.generateChords(pitchIn, 5)
+        return self.generateChords(pitchIn, 10)
 
 
     def generateChords(self, pitchIn, numChords):
@@ -40,8 +40,8 @@ class NumNotes(Rule):
             chordList.append(Chord(notes))
         return chordList
 
-    def trimChord(self, **kwargs):
-        pass
+    def ruleCheck(self, **kwargs):
+        return True
         #progression = kwargs.get("progression", None)
         #chordsIn = progression.chords
         #chordsOut = []

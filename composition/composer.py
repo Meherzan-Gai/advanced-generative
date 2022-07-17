@@ -1,4 +1,5 @@
 #imports
+from threading import activeCount
 from progression import Progression
 from chord import Chord
 
@@ -38,11 +39,10 @@ class Composer:
                         if (possibleChords != None):
                             for chord in possibleChords:
                                 nextProgressions.append(progression.appendChord(chord))
-                    
 
             #RESTRICTING CHORDS????
             for progression in nextProgressions:
-                rule.checkProgression(
+                chordWorks = rule.checkProgression(
                     rules = self.rules,
                     pitchIdx=pitchIdx,
                     pitch=self.pitches[pitchIdx],
@@ -50,12 +50,12 @@ class Composer:
                     newChord=progression.chords[len(progression.chords)-1],
                     progression=progression
                 )
+                if (chordWorks):
+                    activeProgressions.append(progression)
 
             
-            activeProgressions = nextProgressions
             pitchIdx += 1
             self.progressions = activeProgressions #CHANGE THIS LATER ADDED RN TO SEE RESULTS
-            self.printProgressions()
         return self.progressions
 
 

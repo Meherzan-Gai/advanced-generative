@@ -21,5 +21,5 @@ if __name__ == "__main__":
     ruleList = [rule1,rule2]
     composer = Composer([60, 64, 67], ruleList)
     composer.makeChordProgression()
-    #composer.printProgressions()
+    composer.printProgressions()
     print(len(composer.progressions),"progressions generated")

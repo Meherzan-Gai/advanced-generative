@@ -20,7 +20,7 @@ class SharedTone(Rule):
     def generateChords(self, prevChord, pitchIn, cutoff):
         return None
 
-    def trimChord(self, **kwargs):
+    def ruleCheck(self, **kwargs):
         prevChord = kwargs.get("prevChord", None)
         progression = kwargs.get("progression", None)
         newChord = kwargs.get("newChord", None)
@@ -29,7 +29,8 @@ class SharedTone(Rule):
 
         if (prevChord!=None):
             if (SharedTone.numSharedBetween(prevChord,newChord)<self.numShared):
-                progression.delete()
+                return False
+        return True
 
     
     #find the number of shared notes between two chords
