@@ -30,6 +30,16 @@ class Chord:
     def findIntervals(self):
         return ps(self.stack).ivec()
 
+    def findIntervalsBoolean(self):
+        ivec = self.findIntervals()
+        booleanIvec = []
+        for interval in ivec:
+            if (interval>0):
+                booleanIvec.append(True)
+            else:
+                booleanIvec.append(False)
+        return booleanIvec
+
     #finds and returns the pitch class sets that make up the chord (the pitches that make up the chord with no duplicates)
     def findPitchSets(self):
         return ps(self.stack)

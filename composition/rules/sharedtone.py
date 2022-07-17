@@ -22,10 +22,7 @@ class SharedTone(Rule):
 
     def ruleCheck(self, **kwargs):
         prevChord = kwargs.get("prevChord", None)
-        progression = kwargs.get("progression", None)
         newChord = kwargs.get("newChord", None)
-        chordsIn = progression.chords
-        chordsOut = []
 
         if (prevChord!=None):
             if (SharedTone.numSharedBetween(prevChord,newChord)<self.numShared):
