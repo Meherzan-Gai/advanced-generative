@@ -13,13 +13,12 @@ import json
 # Goal: get this to run without errors (doesn't need to produce real results)
 
 if __name__ == "__main__":
-    print("hi")
     with open('composition/config/config.json', 'r') as inputFile:
         ruleData = json.load(inputFile)
-        rule1 = SharedTone(ruleData.get("SharedTone").get("numShared"))
-    rule2 = NumNotes(3)
-    rule3 = NumNotes(3)
-    ruleList = [rule2,rule3]
+        rule1 = NumNotes(ruleData.get("NumNotes").get("numNotes"))
+        rule2 = SharedTone(ruleData.get("SharedTone").get("numShared"))
+    
+    ruleList = [rule1,rule2]
     composer = Composer([60, 64, 67], ruleList)
     composer.makeChordProgression()
     #composer.printProgressions()

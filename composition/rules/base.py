@@ -19,6 +19,10 @@ class Rule(object):
     def getPossibleChords(self, **kwargs):
         return self.getChords(**kwargs)
 
+    #deletes progressions that don't fit rules
+    def checkProgression(self, **kwargs):
+        return self.trimChord(**kwargs)
+
 
     def getPreviousChord(self, progression):
         return progression[self.countPitchIndex]

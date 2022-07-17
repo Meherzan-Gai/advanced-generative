@@ -23,8 +23,9 @@ class Composer:
                         pitch=self.pitches[pitchIdx],
                         prevChord=None
                     )
-                    for chord in possibleChords:
-                        nextProgressions.append(Progression([chord]))
+                    if (possibleChords != None):
+                        for chord in possibleChords:
+                            nextProgressions.append(Progression([chord]))
             else:
                 for progression in activeProgressions:
                     for rule in self.rules:
@@ -34,9 +35,23 @@ class Composer:
                             progression=progression,
                             prevChord=progression.chords[len(progression.chords)-1]
                         )
-                        for chord in possibleChords:
-                            nextProgressions.append(progression.appendChord(chord))
+                        if (possibleChords != None):
+                            for chord in possibleChords:
+                                nextProgressions.append(progression.appendChord(chord))
                     
+
+            #RESTRICTING CHORDS????
+            for progression in nextProgressions:
+                rule.checkProgression(
+                    rules = self.rules,
+                    pitchIdx=pitchIdx,
+                    pitch=self.pitches[pitchIdx],
+                    prevChord=progression.chords[len(progression.chords)-2],
+                    newChord=progression.chords[len(progression.chords)-1],
+                    progression=progression
+                )
+
+            
             activeProgressions = nextProgressions
             pitchIdx += 1
             self.progressions = activeProgressions #CHANGE THIS LATER ADDED RN TO SEE RESULTS

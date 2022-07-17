@@ -19,4 +19,4 @@ class Progression:
         return Progression(newChordList)
         
     def delete(self):
-        pass
+        del self
