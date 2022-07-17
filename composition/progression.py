@@ -5,6 +5,10 @@ class Progression:
         # chords is a sequence of Chord instances
         self.chords = chords
 
+    def length(self):
+        return len(self.chords)
+        
+
     def appendChord(self, chord): 
         #return Progression([self.chords, chord])      ORIGINAL
 

@@ -6,6 +6,8 @@ from rules.sharedtone import SharedTone
 from rules.numnotes import NumNotes
 from rules.interval import Interval
 import json
+from pcsets.pcset import PcSet as ps
+
 
 # use this as a template for importing all your classes
 # SharedTone rule is setup correctly, so also use that as template for structuring all other rule imports

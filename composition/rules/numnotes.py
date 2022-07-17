@@ -1,3 +1,4 @@
+from typing import OrderedDict
 from rules.base import Rule
 from chord import Chord
 from progression import Progression
@@ -11,22 +12,23 @@ class NumNotes(Rule):
     #returns the possible chords that fit this rule
     def getChords(self, **kwargs):
         pitchIn = kwargs.get("pitch")
-        return self.generateChords(pitchIn, 50)
+        return self.generateChords(pitchIn, 250)
 
 
     def generateChords(self, pitchIn, numChords):
-        chordList = []    
+        chordList = []
+        notesList = []  
         maxDistance = 0
         if (self.notesAmount == 2):
-            maxDistance = 12
+            maxDistance = 15
         elif (self.notesAmount == 3):
-            maxDistance = 6
+            maxDistance = 10
         elif (self.notesAmount == 4):
-            maxDistance = 5
+            maxDistance = 7
         elif (self.notesAmount == 5):
-            maxDistance = 4
+            maxDistance = 5
         else:
-            maxDistance = 3
+            maxDistance = 4
         #generates chords 
         for x in range (0,numChords):
             currPitch = 24+(pitchIn%12) #puts the chord towards the lower pitch end as melody is typically higher pitched
@@ -37,7 +39,18 @@ class NumNotes(Rule):
                 randomPitch = random.randrange(1,maxDistance,1)+currPitch
                 currPitch = randomPitch
                 notes.append(randomPitch)
+            notesList.append(notes)
+        
+
+        #REMOVES DUPLICATE CHORDS
+        for notes in notesList[:]:
+            if notesList.count(notes) > 1:
+                notesList.remove(notes)
+
+        #TURNS NOTES INTO CHORDS
+        for notes in notesList:
             chordList.append(Chord(notes))
+
         return chordList
 
     def ruleCheck(self, **kwargs):
@@ -49,5 +62,7 @@ class NumNotes(Rule):
         #return Progression(chordsOut)
 
         
+
+
     #findNumNotes() method in chord class finds number of notes
 
