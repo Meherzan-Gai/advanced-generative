@@ -25,16 +25,8 @@ class SharedTone(Rule):
         newChord = kwargs.get("newChord", None)
 
         if (prevChord!=None):
-            if (SharedTone.numSharedBetween(prevChord,newChord)<self.numShared):
+            if (prevChord.numSharedPitches(newChord)<self.numShared):
                 return False
         return True
 
-    
-    #find the number of shared notes between two chords
-    def numSharedBetween(chord1,chord2):
-        return chord1.numSharedPitches(chord2)
-
-    #find the pitches shared between two chords
-    def findShared(chord1,chord2):
-        return chord1.findSharedPitches(chord2)
 
