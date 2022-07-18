@@ -34,11 +34,27 @@ print(f'Number of frames: {len(S)}')
 # pitch onset tracking
 o_env = librosa.onset.onset_strength(y=y, sr=sr, max_size=1025)
 times = librosa.times_like(o_env, sr=sr)
-onsets = librosa.onset.onset_detect(onset_envelope=o_env, sr=sr)
-print(f'Detected onsets:\n{onsets}')
+onsets = librosa.onset.onset_detect(onset_envelope=o_env, sr=sr, units='frames')
+# print(f'Detected onsets:\n{onsets}')
+# S.shape[1]
 
+# plot of onsets
 plt.plot(times, o_env, label='Onset Strength')
 plt.xlabel('Time (seconds)')
 plt.vlines(times[onsets], 0, o_env.max(), color='r', alpha=0.9, linestyle='--', label='Onsets')
 plt.legend(loc='upper right')
 plt.show()
+
+# gets maximum frequency of each frame of a note
+# "most common" max freq of a note is the pitch of a note
+index_to_note = np.vectorize(lambda x: librosa.hz_to_note(freqs[x]))
+
+for i in range(len(onsets)):
+    start = onsets[i]
+    end = S.shape[1] if i == len(onsets) - 1 else onsets[i + 1]
+    note_frames = S[:, start:end]
+    max_notes = index_to_note(np.nanargmax(note_frames, axis=0))
+    print(f'Onset {i}: {max_notes}')
+    
+
+    
