@@ -17,6 +17,8 @@ class Composer:
         activeProgressions = []
         while pitchIdx < len(self.pitches):
             nextProgressions = []
+
+            #GET POSSIBLE CHORDS AND ADD THEM TO THE ACTIVE PROGRESSIONS
             if len(activeProgressions) == 0:
                 for rule in self.rules:
                     possibleChords = rule.getPossibleChords(
@@ -40,7 +42,8 @@ class Composer:
                             for chord in possibleChords:
                                 nextProgressions.append(progression.appendChord(chord))
 
-            #RESTRICTING PROGRESSIONS AND DELETING OLD ONES
+
+            #DELETING PROGRESSIONS THAT DON'T WORK
             for progression in nextProgressions:
                 chordWorks = rule.checkProgression(
                     rules = self.rules,
@@ -54,6 +57,8 @@ class Composer:
                     activeProgressions.append(progression)
 
             pitchIdx += 1
+
+            #REMOVING OLD PROGRESSIONS 
             idx = 0
             while (idx < len(activeProgressions)):
                 if (activeProgressions[idx].length()<pitchIdx):
