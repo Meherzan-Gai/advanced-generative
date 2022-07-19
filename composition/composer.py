@@ -60,11 +60,9 @@ class Composer:
 
             #REMOVING OLD PROGRESSIONS 
             idx = 0
-            while (idx < len(activeProgressions)):
-                if (activeProgressions[idx].length()<pitchIdx):
-                    activeProgressions.remove(activeProgressions[idx])
-                else:
-                    idx+=1
+            while (idx < len(activeProgressions) and (activeProgressions[idx].length()<pitchIdx)):
+                idx+=1
+            activeProgressions = activeProgressions[idx:]
         self.progressions = activeProgressions #CHANGE THIS LATER ADDED RN TO SEE RESULTS
         return self.progressions
 
