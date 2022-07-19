@@ -13,7 +13,7 @@ class Chord:
         total = 0
         for pitch in self.stack:
             for otherPitch in c2.stack:
-                if pitch == otherPitch:
+                if pitch%12 == otherPitch%12:
                     total+=1
         return total
 
@@ -22,8 +22,8 @@ class Chord:
         sharedPitches =[]
         for pitch in self.stack:
             for otherPitch in c2.stack:
-                if pitch == otherPitch:
-                    sharedPitches.append(pitch)
+                if pitch%12 == otherPitch%12:
+                    sharedPitches.append(pitch%12)
         return sharedPitches
 
     #finds and returns the interval vector of the chord
