@@ -22,13 +22,14 @@ if __name__ == "__main__":
         rule2 = SharedTone(ruleData.get("SharedTone").get("numShared"))
         rule3 = Interval(ruleData.get("Interval").get("intervals"))
     ruleList = [rule1,rule2,rule3]
-    composer = Composer([60, 64, 67], ruleList)
+    composer = Composer([60, 63, 68, 67], ruleList)
     composer.makeChordProgression()
     print(len(composer.progressions),"progressions generated")
 
     print()
     print()
     print("now playing music")
-    player = Player("composition/player.mid")
-    player.writeMusic(composer.progressions[0])
-    player.playMusic()
+    if (len(composer.progressions) > 0):
+        player = Player("composition/player.mid")
+        player.writeMusic(composer.progressions[0])
+        player.playMusic()

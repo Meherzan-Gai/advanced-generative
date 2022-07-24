@@ -31,7 +31,7 @@ class NumNotes(Rule):
             maxDistance = 4
         #generates chords 
         for x in range (0,numChords):
-            currPitch = 24+(pitchIn%12) #puts the chord towards the lower pitch end as melody is typically higher pitched
+            currPitch = 36+(pitchIn%12) #puts the chord towards the lower pitch end as melody is typically higher pitched
             notes = []
             notes.append(currPitch)
             #generates the notes for each chord
@@ -39,8 +39,10 @@ class NumNotes(Rule):
                 randomPitch = random.randrange(1,maxDistance,1)+currPitch
                 currPitch = randomPitch
                 notes.append(randomPitch)
+
+            notes.append(pitchIn) #ADDS THE PITCH IN AT THE END OF THE CHORD
             notesList.append(notes)
-        
+
 
         #REMOVES DUPLICATE CHORDS
         for notes in notesList[:]:
