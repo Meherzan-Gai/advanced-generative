@@ -22,7 +22,7 @@ if __name__ == "__main__":
         rule2 = SharedTone(ruleData.get("SharedTone").get("numShared"))
         rule3 = Interval(ruleData.get("Interval").get("intervals"))
     ruleList = [rule1,rule2,rule3]
-    composer = Composer([60, 63, 68, 67], ruleList)
+    composer = Composer([60, 69, 62, 67], ruleList)
     composer.makeChordProgression()
     print(len(composer.progressions),"progressions generated")
 

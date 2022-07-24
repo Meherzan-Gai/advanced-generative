@@ -37,10 +37,11 @@ class Player:
         while(chordIdx < len(progression.chords)):
             noteIdx = 0
             chord = progression.chords[chordIdx]
-            while(noteIdx < len(chord.stack)):
+            while(noteIdx < len(chord.stack)-1):
                 note = chord.stack[noteIdx]
                 midiPlayer.addNote(track,channel,note,time,duration,volume)
                 noteIdx+=1
+            midiPlayer.addNote(track,channel,chord.stack[noteIdx],time,duration,127) #Adds the pitchIn with more velocity
             time+=1
             chordIdx+=1
         
