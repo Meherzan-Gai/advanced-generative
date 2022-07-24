@@ -7,6 +7,7 @@ from rules.numnotes import NumNotes
 from rules.interval import Interval
 import json
 from pcsets.pcset import PcSet as ps
+from player import Player
 
 
 # use this as a template for importing all your classes
@@ -23,5 +24,11 @@ if __name__ == "__main__":
     ruleList = [rule1,rule2,rule3]
     composer = Composer([60, 64, 67], ruleList)
     composer.makeChordProgression()
-    composer.printProgressions()
     print(len(composer.progressions),"progressions generated")
+
+    print()
+    print()
+    print("now playing music")
+    player = Player("composition/player.mid")
+    player.writeMusic(composer.progressions[0])
+    player.playMusic()
