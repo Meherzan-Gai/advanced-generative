@@ -46,6 +46,7 @@ onsets = librosa.onset.onset_detect(onset_envelope=o_env, sr=sr, units='frames')
 # param: average magnitude of each max bin over each frame
 # param: average difference of each max bin from one frame to another
 
+# for first note
 curr_note = S[:, onsets[0]:onsets[1]]
 print(curr_note.shape[0])
 
@@ -53,9 +54,13 @@ print(curr_note.shape[0])
 arr = np.amax(curr_note, axis=1)
 
 num_highest = 3
-max_ind = np.argsort(arr)[-num_highest:]
-print(max_ind)
+max_bins = np.argpartition(arr, -num_highest)[-num_highest:]
+print(max_bins)
 
+for bin in max_bins:
+    bin_mags = curr_note[bin, :]
+    bin_avg_mag = np.mean(bin_mags)
+    print(f'Average magnitude of bin {bin}: {bin_avg_mag}')
 
 # testing peak pick
 # pre_max
