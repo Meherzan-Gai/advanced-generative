@@ -18,6 +18,7 @@ freqs = librosa.fft_frequencies(sr=sr, n_fft=n_fft)
 
 S = np.abs(librosa.stft(y, n_fft=n_fft))
 print(f'Number of frames: {len(S)}')
+print(f'Num of bins: {len(freqs)}')
 
 # frequency domain graph of n-th frame
 # n = 1
@@ -38,23 +39,24 @@ onsets = librosa.onset.onset_detect(onset_envelope=o_env, sr=sr, units='frames')
 # print(f'Detected onsets:\n{onsets}')
 # S.shape[1]
 
-# plot of onsets
-plt.plot(times, o_env, label='Onset Strength')
-plt.xlabel('Time (seconds)')
-plt.vlines(times[onsets], 0, o_env.max(), color='r', alpha=0.9, linestyle='--', label='Onsets')
-plt.legend(loc='upper right')
-plt.show()
+# ML PARAMS
+# for each bin in each frame, get the magnitude when it was the highest
+# then sort those bins from highest to lowest
+# n highest bins are selected as the bins: "max bin"
+# param: average magnitude of each max bin over each frame
+# param: average difference of each max bin from one frame to another
 
-# gets maximum frequency of each frame of a note
-# "most common" max freq of a note is the pitch of a note
-index_to_note = np.vectorize(lambda x: librosa.hz_to_note(freqs[x]))
+curr_note = S[:, onsets[0]:onsets[1]]
+print(curr_note.shape[0])
 
-for i in range(len(onsets)):
-    start = onsets[i]
-    end = S.shape[1] if i == len(onsets) - 1 else onsets[i + 1]
-    note_frames = S[:, start:end]
-    max_notes = index_to_note(np.nanargmax(note_frames, axis=0))
-    print(f'Onset {i}: {max_notes}')
-    
+# array of max values of each bin
+arr = np.amax(curr_note, axis=1)
 
-    
+num_highest = 3
+max_ind = np.argsort(arr)[-num_highest:]
+print(max_ind)
+
+
+# testing peak pick
+# pre_max
+# post_max
