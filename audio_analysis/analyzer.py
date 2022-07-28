@@ -25,7 +25,7 @@ def get_note_data(note, num_bins=3):
     bin_diffs = np.diff(bin_frames)
     bin_diff_means = np.mean(bin_diffs, axis=1)    
 
-    data = np.concatenate(([bins], [bin_means], [bin_diff_means]), axis=0)
+    data = np.concatenate(([bins], [bin_means], [bin_diff_means]), axis=1)
     return data
 
 if __name__ == '__main__':
@@ -37,4 +37,7 @@ if __name__ == '__main__':
     note = S[:, onsets[0]:onsets[1]]
     data = get_note_data(note)
 
-    print(data)
+    import pandas as pd
+    df = pd.DataFrame(data, columns=['Frequency Bin', 'Average Magnitude', 'Average Difference of Magnitude'])
+
+    print(df)
