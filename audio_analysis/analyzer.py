@@ -16,15 +16,16 @@ def get_note_data(note, num_bins=3):
     # list of the maximum values of each bin across the frames
     bin_maxes = np.amax(note, axis=1)
     # "num_bins"th highest bins ordered from least to greatest
-    bins = np.argpartition(bin_maxes, -num_bins)[-num_bins:]
-    print(bins)
-    print(bin_maxes[bins])
+    bins = np.argpartition(bin_maxes, range(len(bin_maxes) - num_bins, len(bin_maxes)))[-num_bins:]
 
     bin_frames = note[bins, :]
     # average magnitude of each bin across the frames
     bin_means = np.mean(bin_frames, axis=1)
 
-    data = np.append([bins], [bin_means], axis=0)
+    bin_diffs = np.diff(bin_frames)
+    bin_diff_means = np.mean(bin_diffs, axis=1)    
+
+    data = np.concatenate(([bins], [bin_means], [bin_diff_means]), axis=0)
     return data
 
 if __name__ == '__main__':
@@ -34,6 +35,6 @@ if __name__ == '__main__':
     S, freq_range, onsets = get_audio_info(path)
 
     note = S[:, onsets[0]:onsets[1]]
-    data = get_note_data(note, num_bins=10)
+    data = get_note_data(note)
 
     print(data)
