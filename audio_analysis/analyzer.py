@@ -17,7 +17,9 @@ def get_note_data(note, num_highest=3):
     return a
 
 if __name__ == '__main__':
-    path = '/Users/paolo/Documents/Github/generative-music/audio_files/test_audio/test_piano_old.wav'
+    import os
+    # temp path
+    path = os.getcwd() + '/audio_files/test_audio/test_piano_old.wav'
     S, freq_range, onsets = get_audio_info(path)
 
     note = S[:, onsets[0]:onsets[1]]
