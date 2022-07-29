@@ -45,6 +45,10 @@ class Player:
             time+=1
             chordIdx+=1
         
+        #slow tempo
+        tempoTrack = 1
+        midiPlayer.addTempo(tempoTrack,0,90)
+
         with open(self.fileName, 'wb') as outputFile:
             midiPlayer.writeFile(outputFile)
 

@@ -2,7 +2,7 @@ from rules.rule import Rule
 from chord import Chord
 from progression import Progression
 
-class FirstChord(Rule):
+class BaseNote(Rule):
     def __init__(self,level):
         super().__init__()
         self.ruleType = level
@@ -12,9 +12,4 @@ class FirstChord(Rule):
         pass
 
     def ruleCheck(self, **kwargs):
-        pitchIdx = kwargs.get(pitchIdx)
-        if (pitchIdx==0):
-            return True
-
-        else:
-            return True
+        return True

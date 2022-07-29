@@ -1,4 +1,4 @@
-from rules.base import Rule
+from rules.rule import Rule
 from chord import Chord
 from progression import Progression
 import random

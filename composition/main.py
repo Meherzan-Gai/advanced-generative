@@ -28,8 +28,13 @@ if __name__ == "__main__":
 
     print()
     print()
-    print("now playing music")
     if (len(composer.progressions) > 0):
         player = Player("composition/player.mid")
-        player.writeMusic(composer.progressions[0])
-        player.playMusic()
+        while True:
+            try:
+                progressionChosen = int(input("Choose a progression to hear: "))
+                player.writeMusic(composer.progressions[progressionChosen - 1])
+                player.playMusic()
+                break
+            except IndexError:
+                print("Index is out of range. Please select a number from 1 to:",len(composer.progressions))
