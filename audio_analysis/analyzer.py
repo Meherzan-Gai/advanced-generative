@@ -33,7 +33,7 @@ def get_note_data(note, num_bins=3):
     return data
 
 if __name__ == '__main__':
-    import os, pdb
+    import os
     # temp path
     path = os.getcwd() + '/audio_files/test_audio/test_piano_old.wav'
     S, freq_range, onsets = get_audio_info(path)
@@ -42,19 +42,21 @@ if __name__ == '__main__':
     data = get_note_data(note, num_bins=30)
 
     import pandas as pd
-    df = pd.DataFrame(data.T, columns=['Frequency Bin', 'Average Magnitude', 'Average Difference of Magnitude'])
-    # df.sort_values('Average Magnitude', inplace=True, ascending=False)
+    df = pd.DataFrame(data.T, columns=['Frequency Bin', 'Max. Magnitude', 'Min. Magnitude', 'Avg. Magnitude', 'SD Magnitude', 'Avg. Difference', 'SD Difference'])
+    df.sort_values('Avg. Magnitude', inplace=True, ascending=False)
+
+    df.insert(1, 'Note Value', df['Frequency Bin'].apply(lambda x: librosa.hz_to_note(freq_range[int(x)])))
+
     print(df)
 
-    # df['Note'] = df['Frequency Bin'].apply(lambda x: librosa.hz_to_note(freq_range[int(x)]))
-    working_df = df.iloc[0:5]
-    results = {}
-    for i in range(0, working_df.shape[0]):
-        results[f'Bin {i} Average Magnitude'] = working_df.iloc[i]['Average Magnitude']
-        results[f'Bin {i} Average Diff of Mag'] = working_df.iloc[i]['Average Difference of Magnitude']
+    # working_df = df.iloc[0:5]
+    # results = {}
+    # for i in range(0, working_df.shape[0]):
+    #     results[f'Bin {i} Average Magnitude'] = working_df.iloc[i]['Average Magnitude']
+    #     results[f'Bin {i} Average Diff of Mag'] = working_df.iloc[i]['Average Difference of Magnitude']
     
-    final = pd.DataFrame([results])
-    final['Target'] = 391.995
-    print(final)
+    # final = pd.DataFrame([results])
+    # final['Target'] = 391.995
+    # print(final)
 
-    # print(df)
+    # # print(df)
