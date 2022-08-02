@@ -7,9 +7,12 @@
 
 ## Levels:
 
-1. All chords must have the pitchIn note in the bass of the chord
-    1. Example: If the note that is being harmonized is a C, then there must be a C in the bass of the chord (octave of the chord doesn't matter)
-        1. [C, E, G] is allowed as C is in the base of the note
-        2. [G, C, E] isn't allowed as G is in the base of the note
+1. Bassline can only step (move a maximum of 2 semitones)
+    1. Example: A D minor chord [D, F, A] can come after a C major chord [C, E, G] as  C to D is a step
+        1. However a D minor chord in first inversion [F, A, D] cannot come after a C major chord as C to F is more than a step
 
-2. 
+2. Bassline can move a maximum of 4 semitones 
+    1. Example: An E minor chord [E, G, B] can come after a C major chord [C, E, G] as  C to E is a leap of 4 semitones
+        1. However an E minor chord in first inversion [G, B, E] cannot come after a C major chord as C to G is more than 4 semitones
+3. Bassline can move a maximum of an octave
+    1. All chords are allowed with this rule (provided they are in the proper octave)
