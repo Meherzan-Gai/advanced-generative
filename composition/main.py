@@ -1,4 +1,5 @@
 #imports
+from lib2to3.pytree import Base
 from composer import Composer
 from progression import Progression
 from chord import Chord
@@ -6,6 +7,7 @@ from rules.sharedtone import SharedTone
 from rules.numnotes import NumNotes
 from rules.interval import Interval
 from rules.firstchord import FirstChord
+from rules.basenote import BaseNote
 import json
 from pcsets.pcset import PcSet as ps
 from player import Player
@@ -23,7 +25,8 @@ if __name__ == "__main__":
         rule2 = SharedTone(ruleData.get("SharedTone").get("numShared"))
         rule3 = Interval(ruleData.get("Interval").get("intervals"))
         rule4 = FirstChord(ruleData.get("FirstChord").get("ruleOn"))
-    ruleList = [rule1,rule2,rule3,rule4]
+        rule5 = BaseNote(ruleData.get("BaseNote").get("level"))
+    ruleList = [rule1,rule2,rule3,rule4,rule5]
     composer = Composer([60, 63, 67, 68, 67, 60, 59], ruleList)
     composer.makeChordProgression()
     print(len(composer.progressions),"progressions generated")
