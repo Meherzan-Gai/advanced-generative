@@ -17,5 +17,9 @@
 
     "FirstChord": {
         "ruleOn" : true
+    },
+
+    "BaseNote": {
+        "level" : 3
     }
 }
