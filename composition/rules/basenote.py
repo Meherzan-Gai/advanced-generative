@@ -9,7 +9,7 @@ class BaseNote(Rule):
             self.maxDistance = 2
         elif (level==2):
             self.maxDistance = 4
-        else:
+        elif (level==3):
             self.maxDistance = 12
 
     #returns the possible chords that fit this rule
