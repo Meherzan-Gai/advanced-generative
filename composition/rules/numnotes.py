@@ -1,9 +1,9 @@
-from rules.rule import Rule
+from rules.buildingrule import BuildingRule
 from chord import Chord
 from progression import Progression
 import random
 
-class NumNotes(Rule):
+class NumNotes(BuildingRule):
     def __init__(self,notesAmount):
         super().__init__()
         self.notesAmount = notesAmount

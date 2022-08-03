@@ -1,7 +1,7 @@
-from rules.rule import Rule
+from rules.buildingrule import BuildingRule
 from chord import Chord
 
-class Interval(Rule):
+class Interval(BuildingRule):
     def __init__(self,intervalLengths):
         super().__init__()
         self.intervalLengths = intervalLengths
