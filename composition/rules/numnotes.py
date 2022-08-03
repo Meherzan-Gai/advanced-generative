@@ -17,29 +17,19 @@ class NumNotes(Rule):
     def generateChords(self, pitchIn, numChords):
         chordList = []
         notesList = []  
-        maxDistance = 0
-        if (self.notesAmount == 2):
-            maxDistance = 15
-        elif (self.notesAmount == 3):
-            maxDistance = 10
-        elif (self.notesAmount == 4):
-            maxDistance = 7
-        elif (self.notesAmount == 5):
-            maxDistance = 5
-        else:
-            maxDistance = 4
-        #generates chords 
-        for x in range (0,numChords):
-            currPitch = 36+(pitchIn%12) #puts the chord towards the lower pitch end as melody is typically higher pitched
-            notes = []
-            notes.append(currPitch)
-            #generates the notes for each chord
-            for n in range (0,self.notesAmount-1):
-                randomPitch = random.randrange(1,maxDistance,1)+currPitch
-                currPitch = randomPitch
-                notes.append(randomPitch)
+        
 
-            notes.append(pitchIn) #ADDS THE PITCH IN AT THE END OF THE CHORD
+        #generates base note and pitch class
+        for x in range (0,numChords):
+            notes = []
+            #generates the notes for each chord
+            possibleNotes = [0,1,2,3,4,5,6,7,8,9,10,11]
+            notes.append(pitchIn%12)
+            possibleNotes.remove(pitchIn%12)
+            for n in range (0,self.notesAmount-1):
+                randomPitch = possibleNotes[random.randrange(0,len(possibleNotes),1)]
+                possibleNotes.remove(randomPitch)
+                notes.append(randomPitch)
             notesList.append(notes)
 
 
