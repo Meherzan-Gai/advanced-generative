@@ -13,5 +13,9 @@
     "Interval": {
         "intervals":[false,false,true,true,true,false]
 
+    },
+
+    "FirstChord": {
+        "ruleOn" : true
     }
 }

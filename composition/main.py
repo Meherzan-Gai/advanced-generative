@@ -5,6 +5,7 @@ from chord import Chord
 from rules.sharedtone import SharedTone
 from rules.numnotes import NumNotes
 from rules.interval import Interval
+from rules.firstchord import FirstChord
 import json
 from pcsets.pcset import PcSet as ps
 from player import Player
@@ -21,11 +22,12 @@ if __name__ == "__main__":
         rule1 = NumNotes(ruleData.get("NumNotes").get("numNotes"))
         rule2 = SharedTone(ruleData.get("SharedTone").get("numShared"))
         rule3 = Interval(ruleData.get("Interval").get("intervals"))
-    ruleList = [rule1,rule2,rule3]
+        rule4 = FirstChord(ruleData.get("FirstChord").get("ruleOn"))
+    ruleList = [rule1,rule2,rule3,rule4]
     composer = Composer([60, 63, 67, 68, 67, 60, 59], ruleList)
     composer.makeChordProgression()
     print(len(composer.progressions),"progressions generated")
-
+    composer.printProgressions()
     print()
     print()
     if (len(composer.progressions) > 0):
