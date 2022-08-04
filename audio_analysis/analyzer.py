@@ -10,6 +10,16 @@ def get_audio_info(path, n_fft=2048):
     freq_range = librosa.fft_frequencies(sr=sr, n_fft=n_fft)
     o_env = librosa.onset.onset_strength(y=y, sr=sr, max_size=S.shape[0])
     onsets = librosa.onset.onset_detect(onset_envelope=o_env, sr=sr, units='frames')
+
+    # # onset strength graph
+    # import matplotlib.pyplot as plt
+    # times = librosa.times_like(o_env, sr=sr)
+    # plt.plot(times, o_env, label='Onset Strength')
+    # plt.xlabel('Time (seconds)')
+    # plt.vlines(times[onsets], 0, o_env.max(), color='r', alpha=0.9, linestyle='--', label='Onsets')
+    # plt.legend(loc='upper right')
+    # plt.show()
+
     return S, freq_range, onsets
 
 def get_note_data(note, num_bins=3):
@@ -44,16 +54,18 @@ if __name__ == '__main__':
     import pandas as pd
     df = pd.DataFrame(data.T, columns=['Frequency Bin', 'Max. Magnitude', 'Min. Magnitude', 'Avg. Magnitude', 'SD Magnitude', 'Avg. Difference', 'SD Difference'])
     df.sort_values('Avg. Magnitude', inplace=True, ascending=False)
-
-    df.insert(1, 'Note Value', df['Frequency Bin'].apply(lambda x: librosa.hz_to_note(freq_range[int(x)])))
-
+    # df.insert(1, 'Note Value', df['Frequency Bin'].apply(lambda x: librosa.hz_to_note(freq_range[int(x)])))
     print(df)
 
-    # working_df = df.iloc[0:5]
-    # results = {}
-    # for i in range(0, working_df.shape[0]):
-    #     results[f'Bin {i} Average Magnitude'] = working_df.iloc[i]['Average Magnitude']
-    #     results[f'Bin {i} Average Diff of Mag'] = working_df.iloc[i]['Average Difference of Magnitude']
+    working_df = df.iloc[0:5]
+    results = {}
+    for i in range(0, working_df.shape[0]):
+        for col_name in working_df.columns[1:]:
+            freq_bin = int(working_df.iloc[i]['Frequency Bin'])
+            results[f'Bin {freq_bin} {col_name}'] = working_df.iloc[i][col_name]
+
+    final = pd.DataFrame([results])
+    print(final)
     
     # final = pd.DataFrame([results])
     # final['Target'] = 391.995
