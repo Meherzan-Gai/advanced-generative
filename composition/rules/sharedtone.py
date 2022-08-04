@@ -1,10 +1,10 @@
 #imports
-from rules.buildingrule import BuildingRule
+from rules.rule import Rule
 from chord import Chord
 from progression import Progression
 import random
 
-class SharedTone(BuildingRule):
+class SharedTone(Rule):
     def __init__(self,numShared):
         super().__init__()
         self.numShared = numShared

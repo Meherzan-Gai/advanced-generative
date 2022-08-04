@@ -1,11 +1,11 @@
 
 
-class BuildingRule(object):
+class Rule(object):
 
     instances = []
 
     def __init__(self):
-        BuildingRule.instances.append(self)
+        Rule.instances.append(self)
 
 
     #finds the order of priority for the rules

@@ -1,9 +1,8 @@
-from rules.voicingrule import VoicingRule
-from rules.buildingrule import BuildingRule
+from rules.rule import Rule
 from chord import Chord
 from progression import Progression
 
-class BaseNote(BuildingRule,VoicingRule):
+class BaseNote(Rule):
     def __init__(self,level):
         super().__init__()
         if (level==1):
@@ -18,9 +17,10 @@ class BaseNote(BuildingRule,VoicingRule):
         pass
 
     def ruleCheck(self, **kwargs):
-        prevChord = kwargs.get("prevChord", None)
-        newChord = kwargs.get("newChord", None)
-        distance = abs(prevChord.stack[0]-newChord.stack[0])
-        if (distance<(12-self.maxDistance) and distance > self.maxDistance):
-            return False
-        return True
+        #prevChord = kwargs.get("prevChord", None)
+        #newChord = kwargs.get("newChord", None)
+        #distance = abs(prevChord.stack[0]-newChord.stack[0])
+        #if (distance<(12-self.maxDistance) and distance > self.maxDistance):
+        #    return False
+        #return True
+        pass
