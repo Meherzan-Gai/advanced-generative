@@ -11,7 +11,7 @@ class NumNotes(Rule):
     #returns the possible chords that fit this rule
     def getChords(self, **kwargs):
         pitchIn = kwargs.get("pitch")
-        return self.generateChords(pitchIn, 50)
+        return self.generateChords(pitchIn, 75)
 
 
     def generateChords(self, pitchIn, numChords):
@@ -24,12 +24,16 @@ class NumNotes(Rule):
             notes = []
             #generates the notes for each chord
             possibleNotes = [0,1,2,3,4,5,6,7,8,9,10,11]
-            notes.append(pitchIn%12)
-            possibleNotes.remove(pitchIn%12)
             for n in range (0,self.notesAmount-1):
                 randomPitch = possibleNotes[random.randrange(0,len(possibleNotes),1)]
                 possibleNotes.remove(randomPitch)
                 notes.append(randomPitch)
+
+            if (pitchIn%12 in possibleNotes):
+                notes.append(pitchIn%12)
+            else:
+                notes.append(possibleNotes[random.randrange(0,len(possibleNotes),1)])
+
             notesList.append(notes)
 
 

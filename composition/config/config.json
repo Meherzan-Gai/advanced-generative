@@ -16,7 +16,7 @@
     },
 
     "FirstChord": {
-        "ruleOn" : true
+        "ruleOn" : false
     },
 
     "BaseNote": {

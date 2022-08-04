@@ -25,11 +25,11 @@ if __name__ == "__main__":
         rule3 = Interval(ruleData.get("Interval").get("intervals"))
         rule4 = FirstChord(ruleData.get("FirstChord").get("ruleOn"))
         rule5 = BaseNote(ruleData.get("BaseNote").get("level"))
-    ruleList = [rule1,rule2,rule3]
+    ruleList = [rule1,rule2,rule3,rule4]
     composer = Composer([60, 63, 67, 68, 67, 60, 59], ruleList)
     composer.makeChordProgression()
-    print(len(composer.progressions),"progressions generated")
     composer.printProgressions()
+    print(len(composer.progressions),"progressions generated")
     print()
     print()
     if (len(composer.progressions) > 0):

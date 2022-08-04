@@ -17,10 +17,9 @@ class BaseNote(Rule):
         pass
 
     def ruleCheck(self, **kwargs):
-        #prevChord = kwargs.get("prevChord", None)
-        #newChord = kwargs.get("newChord", None)
-        #distance = abs(prevChord.stack[0]-newChord.stack[0])
-        #if (distance<(12-self.maxDistance) and distance > self.maxDistance):
-        #    return False
-        #return True
-        pass
+        prevChord = kwargs.get("prevChord", None)
+        newChord = kwargs.get("newChord", None)
+        distance = abs(prevChord.stack[0]-newChord.stack[0])
+        if (distance<(12-self.maxDistance) and distance > self.maxDistance):
+            return False
+        return True

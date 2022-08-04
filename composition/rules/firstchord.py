@@ -8,8 +8,15 @@ class FirstChord(Rule):
         super().__init__()
         self.ruleOn = ruleOn
 
-    def voiceCheck(self,progression,pitches):
+    def getChords(self,**kwargs):
+        pass
+
+    def ruleCheck(self,**kwargs):
+        pitchIn = kwargs.get("pitch")
+        newChord = kwargs.get("newChord")
+        pitchIdx = kwargs.get("pitchIdx")
         if (self.ruleOn):
-            if (progression.chords[0].stack[0]!=pitches[0]%12):
-                return False
+            if (pitchIdx==0):
+                if (pitchIn%12!=newChord.stack[0]):
+                    return False
         return True
