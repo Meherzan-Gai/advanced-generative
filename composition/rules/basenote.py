@@ -22,4 +22,6 @@ class BaseNote(Rule):
         distance = abs(prevChord.stack[0]-newChord.stack[0])
         if (distance<(12-self.maxDistance) and distance > self.maxDistance):
             return False
+        if (distance>=(12-self.maxDistance)):
+            newChord.stack[0]-=12
         return True
