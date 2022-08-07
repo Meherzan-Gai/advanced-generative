@@ -1,25 +1,29 @@
 {
     "SharedTone": {
         "options" : [0,1,2,3,4,5],
-        "numShared": 2
+        "numShared" : 2,
+        "priority" : 1
 
     },
 
     "NumNotes": {
-        "numNotes": 3
+        "numNotes" : 3
 
     },
 
     "Interval": {
-        "intervals":[false,false,true,true,true,false]
+        "intervals":[false,false,true,true,true,false],
+        "priority" : 2
 
     },
 
     "FirstChord": {
-        "ruleOn" : false
+        "ruleOn" : true,
+        "priority" : 3
     },
 
     "BaseNote": {
-        "level" : 3
+        "level" : 3,
+        "priority" : 4
     }
 }

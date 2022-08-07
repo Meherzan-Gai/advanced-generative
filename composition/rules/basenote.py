@@ -3,8 +3,8 @@ from chord import Chord
 from progression import Progression
 
 class BaseNote(Rule):
-    def __init__(self,level):
-        super().__init__()
+    def __init__(self,priority,level):
+        super().__init__(priority)
         if (level==1):
             self.maxDistance = 2
         elif (level==2):

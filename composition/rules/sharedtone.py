@@ -5,8 +5,8 @@ from progression import Progression
 import random
 
 class SharedTone(Rule):
-    def __init__(self,numShared):
-        super().__init__()
+    def __init__(self,priority,numShared):
+        super().__init__(priority)
         self.numShared = numShared
         
     

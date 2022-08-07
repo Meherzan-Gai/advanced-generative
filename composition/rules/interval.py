@@ -2,8 +2,8 @@ from rules.rule import Rule
 from chord import Chord
 
 class Interval(Rule):
-    def __init__(self,intervalLengths):
-        super().__init__()
+    def __init__(self,priority,intervalLengths):
+        super().__init__(priority)
         self.intervalLengths = intervalLengths
     
     #gets chords that work for the rule

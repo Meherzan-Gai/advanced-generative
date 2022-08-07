@@ -4,8 +4,8 @@ from progression import Progression
 import random
 
 class NumNotes(Rule):
-    def __init__(self,notesAmount):
-        super().__init__()
+    def __init__(self,priority,notesAmount):
+        super().__init__(priority)
         self.notesAmount = notesAmount
 
     #returns the possible chords that fit this rule

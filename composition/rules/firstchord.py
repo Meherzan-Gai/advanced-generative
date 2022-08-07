@@ -4,8 +4,8 @@ from chord import Chord
 from progression import Progression
 
 class FirstChord(Rule):
-    def __init__(self,ruleOn):
-        super().__init__()
+    def __init__(self,priority,ruleOn):
+        super().__init__(priority)
         self.ruleOn = ruleOn
 
     def getChords(self,**kwargs):

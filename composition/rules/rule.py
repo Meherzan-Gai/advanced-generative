@@ -4,8 +4,9 @@ class Rule(object):
 
     instances = []
 
-    def __init__(self):
+    def __init__(self,priority):
         Rule.instances.append(self)
+        self.priority = priority
 
 
     #finds the order of priority for the rules
