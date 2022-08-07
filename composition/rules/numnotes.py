@@ -11,7 +11,7 @@ class NumNotes(Rule):
     #returns the possible chords that fit this rule
     def getChords(self, **kwargs):
         pitchIn = kwargs.get("pitch")
-        return self.generateChords(pitchIn, 150)
+        return self.generateChords(pitchIn, 200)
 
 
     def generateChords(self, pitchIn, numChords):

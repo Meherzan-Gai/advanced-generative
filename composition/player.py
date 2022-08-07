@@ -41,13 +41,13 @@ class Player:
                 note = chord.stack[noteIdx]
                 midiPlayer.addNote(track,channel,note,time,duration,volume)
                 noteIdx+=1
-            midiPlayer.addNote(track,channel,pitches[chordIdx],time,duration,127) #Adds the pitchIn with more velocity
+            midiPlayer.addNote(track,channel,pitches[chordIdx],time,duration,110) #Adds the pitchIn with less velocity
             time+=1
             chordIdx+=1
         
         #slow tempo
         tempoTrack = 1
-        midiPlayer.addTempo(tempoTrack,0,90)
+        midiPlayer.addTempo(tempoTrack,0,85)
 
         with open(self.fileName, 'wb') as outputFile:
             midiPlayer.writeFile(outputFile)

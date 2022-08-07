@@ -22,19 +22,19 @@ class VoicingRule:
         pitchLow = VoicingRule.getLowest(self.pitches)
         pitchHigh = VoicingRule.getHighest(self.pitches)
 
-        if (pitchLow>progressionHigh):
-            while (pitchLow>progressionHigh+12+self.shiftAmt):
+        if (pitchLow>progressionHigh):   
+            while (pitchLow>progressionHigh+24+self.shiftAmt):
                 self.shiftAmt+=12
         
 
     
-    def moveBassline(self,progression):
-        for chord in progression.chords:
-            chord[0]+=self.shiftAmt
+    def moveBassline(self):
+        for chord in self.progression.chords:
+            chord.stack[0]+=self.shiftAmt
 
 
-    def moveNotes(self,progression):
-        for chord in progression.chords:
+    def moveNotes(self):
+        for chord in self.progression.chords:
             for noteIdx in range (1,len(chord.stack),1):
                 while (chord.stack[noteIdx] < chord.stack[0]):
                     chord.stack[noteIdx]+=12

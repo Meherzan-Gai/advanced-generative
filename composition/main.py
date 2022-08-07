@@ -40,6 +40,9 @@ if __name__ == "__main__":
             try:
                 progressionChosen = int(input("Choose a progression to hear: "))
                 voicer = VoicingRule(composer.progressions[progressionChosen-1],melody)
+                voicer.getVoicing()
+                for chord in voicer.progression.chords:
+                    print (chord.stack)
                 player.writeMusic(voicer.progression, melody)
                 player.playMusic()
                 break
