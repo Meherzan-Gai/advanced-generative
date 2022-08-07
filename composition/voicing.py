@@ -17,12 +17,14 @@ class VoicingRule:
         bassNotes = []
         for chord in self.progression.chords:
             bassNotes.append(chord.stack[0])
-        progressionLow = VoicingRule.getLowest(bassNotes)
         progressionHigh = VoicingRule.getHighest(bassNotes)
         pitchLow = VoicingRule.getLowest(self.pitches)
         pitchHigh = VoicingRule.getHighest(self.pitches)
 
-        if (pitchLow>progressionHigh):   
+        if (pitchHigh<36):
+            self.shiftAmt = 48
+
+        elif (pitchLow>progressionHigh):   
             while (pitchLow>progressionHigh+24+self.shiftAmt):
                 self.shiftAmt+=12
         
