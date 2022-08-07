@@ -1,7 +1,8 @@
+import os.path
 import librosa
 import librosa.onset
-
 import numpy as np
+import pandas as pd
 
 def get_audio_info(path, n_fft=2048):
     y, sr = librosa.load(path)
@@ -9,16 +10,16 @@ def get_audio_info(path, n_fft=2048):
     S = np.abs(librosa.stft(y, n_fft=n_fft))
     freq_range = librosa.fft_frequencies(sr=sr, n_fft=n_fft)
     o_env = librosa.onset.onset_strength(y=y, sr=sr, max_size=S.shape[0])
-    onsets = librosa.onset.onset_detect(onset_envelope=o_env, sr=sr, units='frames')
+    onsets = librosa.onset.onset_detect(onset_envelope=o_env, sr=sr, units='frames', pre_max=3, post_max=3, pre_avg=3, post_avg=5)
 
-    # # onset strength graph
-    # import matplotlib.pyplot as plt
-    # times = librosa.times_like(o_env, sr=sr)
-    # plt.plot(times, o_env, label='Onset Strength')
-    # plt.xlabel('Time (seconds)')
-    # plt.vlines(times[onsets], 0, o_env.max(), color='r', alpha=0.9, linestyle='--', label='Onsets')
-    # plt.legend(loc='upper right')
-    # plt.show()
+    # onset strength graph
+    import matplotlib.pyplot as plt
+    times = librosa.times_like(o_env, sr=sr)
+    plt.plot(times, o_env, label='Onset Strength')
+    plt.xlabel('Time (seconds)')
+    plt.vlines(times[onsets], 0, o_env.max(), color='r', alpha=0.9, linestyle='--', label='Onsets')
+    plt.legend(loc='upper right')
+    plt.show()
 
     return S, freq_range, onsets
 
@@ -42,20 +43,14 @@ def get_note_data(note, num_bins=3):
     data = np.concatenate(([bins], [mag_maxes], [mag_mins], [mag_means], [mag_stds], [diff_avgs], [diff_stds]), axis=0)
     return data
 
-if __name__ == '__main__':
-    import os
-    # temp path
-    path = os.getcwd() + '/audio_files/test_audio/test_piano_old.wav'
+def analyze(path):
     S, freq_range, onsets = get_audio_info(path)
 
-    note = S[:, onsets[1]:onsets[2]]
+    note = S[:, onsets[0]:onsets[1]]
     data = get_note_data(note, num_bins=30)
 
-    import pandas as pd
     df = pd.DataFrame(data.T, columns=['Frequency Bin', 'Max. Magnitude', 'Min. Magnitude', 'Avg. Magnitude', 'SD Magnitude', 'Avg. Difference', 'SD Difference'])
     df.sort_values('Avg. Magnitude', inplace=True, ascending=False)
-    # df.insert(1, 'Note Value', df['Frequency Bin'].apply(lambda x: librosa.hz_to_note(freq_range[int(x)])))
-    print(df)
 
     working_df = df.iloc[0:5]
     results = {}
@@ -63,12 +58,17 @@ if __name__ == '__main__':
         for col_name in working_df.columns[1:]:
             freq_bin = int(working_df.iloc[i]['Frequency Bin'])
             results[f'Bin {freq_bin} {col_name}'] = working_df.iloc[i][col_name]
-
     final = pd.DataFrame([results])
-    print(final)
-    
-    # final = pd.DataFrame([results])
-    # final['Target'] = 391.995
-    # print(final)
 
-    # # print(df)
+    basename = os.path.basename(path)
+    note_name = basename[:basename.index('.')]
+    target = librosa.note_to_hz(note_name)
+    final['Target'] = target
+
+    return final
+
+if __name__ == '__main__':
+    import os
+    # temp path
+    path = os.getcwd() + '/audio_analysis/samples/C4.wav'
+    print(analyze(path))
