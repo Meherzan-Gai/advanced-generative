@@ -1,5 +1,6 @@
 #imports
 from composer import Composer
+from voicing import VoicingRule
 from progression import Progression
 from chord import Chord
 from rules.sharedtone import SharedTone
@@ -26,7 +27,8 @@ if __name__ == "__main__":
         rule4 = FirstChord(ruleData.get("FirstChord").get("ruleOn"))
         rule5 = BaseNote(ruleData.get("BaseNote").get("level"))
     ruleList = [rule1,rule2,rule3,rule4,rule5]
-    composer = Composer([60, 63, 67, 68, 67, 60, 59], ruleList)
+    melody = [60, 63, 67, 68, 67, 60, 59]
+    composer = Composer(melody, ruleList)
     composer.makeChordProgression()
     composer.printProgressions()
     print(len(composer.progressions),"progressions generated")
@@ -37,7 +39,8 @@ if __name__ == "__main__":
         while True:
             try:
                 progressionChosen = int(input("Choose a progression to hear: "))
-                player.writeMusic(composer.progressions[progressionChosen - 1])
+                voicer = VoicingRule(composer.progressions[progressionChosen-1],melody)
+                player.writeMusic(voicer.progression, melody)
                 player.playMusic()
                 break
             except IndexError:
