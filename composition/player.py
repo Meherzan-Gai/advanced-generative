@@ -16,7 +16,7 @@ class Player:
         self.fileName = fileName
 
 
-    def writeMusic(self,progression):
+    def writeMusic(self,progression,pitches):
         midiPlayer = MIDIFile(
             numTracks = 1,
             removeDuplicates=True,
@@ -37,11 +37,11 @@ class Player:
         while(chordIdx < len(progression.chords)):
             noteIdx = 0
             chord = progression.chords[chordIdx]
-            while(noteIdx < len(chord.stack)-1):
+            while(noteIdx < len(chord.stack)):
                 note = chord.stack[noteIdx]
                 midiPlayer.addNote(track,channel,note,time,duration,volume)
                 noteIdx+=1
-            midiPlayer.addNote(track,channel,chord.stack[noteIdx],time,duration,127) #Adds the pitchIn with more velocity
+            midiPlayer.addNote(track,channel,pitches[chordIdx],time,duration,127) #Adds the pitchIn with more velocity
             time+=1
             chordIdx+=1
         
