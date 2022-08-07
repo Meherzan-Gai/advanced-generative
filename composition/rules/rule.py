@@ -10,8 +10,8 @@ class Rule(object):
 
 
     #finds the order of priority for the rules
-    def getPriority():
-        pass
+    def getPriority(self):
+        return self.priority
     
 
     #creates a list of possible chords that fit the rules

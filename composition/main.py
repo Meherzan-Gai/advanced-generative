@@ -3,6 +3,7 @@ from composer import Composer
 from voicing import VoicingRule
 from progression import Progression
 from chord import Chord
+from rules.rule import Rule
 from rules.sharedtone import SharedTone
 from rules.numnotes import NumNotes
 from rules.interval import Interval
@@ -21,12 +22,15 @@ from player import Player
 if __name__ == "__main__":
     with open('composition/config/config.json', 'r') as inputFile:
         ruleData = json.load(inputFile)
-        rule1 = NumNotes(ruleData.get("NumNotes").get("numNotes"))
-        rule2 = SharedTone(ruleData.get("SharedTone").get("numShared"))
-        rule3 = Interval(ruleData.get("Interval").get("intervals"))
-        rule4 = FirstChord(ruleData.get("FirstChord").get("ruleOn"))
-        rule5 = BaseNote(ruleData.get("BaseNote").get("level"))
+        rule2 = NumNotes(ruleData.get("NumNotes").get("priority"),ruleData.get("NumNotes").get("numNotes"))
+        rule3 = SharedTone(ruleData.get("SharedTone").get("priority"),ruleData.get("SharedTone").get("numShared"))
+        rule4 = Interval(ruleData.get("Interval").get("priority"),ruleData.get("Interval").get("intervals"))
+        rule1 = FirstChord(ruleData.get("FirstChord").get("priority"),ruleData.get("FirstChord").get("ruleOn"))
+        rule5 = BaseNote(ruleData.get("BaseNote").get("priority"),ruleData.get("BaseNote").get("level"))
+
     ruleList = [rule1,rule2,rule3,rule4,rule5]
+    ruleList = sorted(ruleList, key=lambda rule: rule.getPriority()) #SORTS RULES
+
     melody = [60, 63, 67, 68, 67, 60, 59]
     composer = Composer(melody, ruleList)
     composer.makeChordProgression()
