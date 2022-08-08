@@ -13,7 +13,7 @@
     },
 
     "Interval": {
-        "intervals":[false,false,true,true,true,false],
+        "intervals":[false,false,true,true,true,true],
         "priority" : 3
 
     },
@@ -24,7 +24,7 @@
     },
 
     "BaseNote": {
-        "level" : 2,
+        "level" : 3,
         "priority" : 5
     }
 }

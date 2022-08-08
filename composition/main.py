@@ -31,7 +31,8 @@ if __name__ == "__main__":
     ruleList = [rule1,rule2,rule3,rule4,rule5]
     ruleList = sorted(ruleList, key=lambda rule: rule.getPriority()) #SORTS RULES
 
-    melody = [60, 63, 67, 68, 67, 60, 59]
+    #melody = [60, 63, 67, 68, 67, 60, 59]
+    melody = [n+24 for n in [60,66,67]]
     composer = Composer(melody, ruleList)
     composer.makeChordProgression()
     composer.printProgressions()

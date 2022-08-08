@@ -18,10 +18,11 @@ class Interval(Rule):
 
     def ruleCheck(self, **kwargs):
         newChord = kwargs.get("newChord", None)
-        if (newChord.findIntervalsBoolean() == self.intervalLengths):
-            return True
-        else:
-            return False
+        newIvec = newChord.findIntervalsBoolean()
+        for ivecIdx in range (0,6,1):
+            if (newIvec[ivecIdx]==True and self.intervalLengths[ivecIdx]==False):
+                return False
+        return True
 
     #finds the notes one interval distance above the current note with all the possible interval lengths
     def intUp(intervalLength,note):
