@@ -24,7 +24,7 @@
     },
 
     "BaseNote": {
-        "level" : 3,
+        "level" : 2,
         "priority" : 5
     }
 }
