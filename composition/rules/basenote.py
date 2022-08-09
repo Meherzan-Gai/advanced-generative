@@ -20,6 +20,8 @@ class BaseNote(Rule):
         prevChord = kwargs.get("prevChord", None)
         newChord = kwargs.get("newChord", None)
         distance = abs(prevChord.stack[0]-newChord.stack[0])
+        if (self.maxDistance==12):
+            return True
         if (distance<(12-self.maxDistance) and distance > self.maxDistance):
             return False
         if (distance>=(12-self.maxDistance)):
