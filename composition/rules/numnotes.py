@@ -33,7 +33,10 @@ class NumNotes(Rule):
                 notes.append(pitchIn%12)
             else:
                 notes.append(possibleNotes[random.randrange(0,len(possibleNotes),1)])
-
+            
+            bassNote = notes[0]
+            notes = sorted(notes[1:])
+            notes.insert(0,bassNote)
             notesList.append(notes)
 
 
