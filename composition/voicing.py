@@ -14,6 +14,7 @@ class VoicingRule:
         self.moveNotes()
             
     def setShiftAmt(self):
+        self.shiftAmt = 12
         bassNotes = []
         for chord in self.progression.chords:
             bassNotes.append(chord.stack[0])

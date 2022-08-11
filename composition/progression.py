@@ -22,5 +22,7 @@ class Progression:
         newChordList.append(chord)
         return Progression(newChordList)
         
+    def clone(self):
+        return Progression(self.chords)   
     def delete(self):
         del self

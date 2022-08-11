@@ -36,7 +36,7 @@ if __name__ == "__main__":
     ruleList = [rule1,rule2,rule3,rule4,rule5]
     ruleList = sorted(ruleList, key=lambda rule: rule.getPriority()) #SORTS RULES
 
-    #melody = [n+24 for n in [60,66,67]]
+    melody = [n+12 for n in melody]
     composer = Composer(melody, ruleList, maxChords, maxRetries)
     composer.makeChordProgression()
     composer.printProgressions()
@@ -50,19 +50,22 @@ if __name__ == "__main__":
             choice = input("Type 1 to hear progressions, 2 to download progressions, or 3 to end the program: ")
             print()
             if (choice == "1"):
-                pressQuit = False
+                pressQuit = True
                 while pressQuit:
                     try:
-                        option = int(input("Choose a progression to hear or type 'q' to quit: "))
+                        option = input("Choose a progression to hear or type 'q' to quit: ")
                         print()
                         if (option == "q"):
-                            pressQuit = True
-                                
-
-                        voicer = VoicingRule(composer.progressions[option-1],melody)
+                            pressQuit = False
+                        option = int(option)
+                        progressionChosen = composer.progressions[option-1].clone()
+                        voicer = VoicingRule(progressionChosen,melody)
                         voicer.getVoicing()
                         player.writeMusic(voicer.progression, melody)
+                        for chord in voicer.progression.chords:
+                            print(chord.stack)
                         player.playMusic()
+                        
                         
 
                     except IndexError:

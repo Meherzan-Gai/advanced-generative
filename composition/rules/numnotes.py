@@ -11,14 +11,13 @@ class NumNotes(Rule):
     #returns the possible chords that fit this rule
     def getChords(self, **kwargs):
         pitchIn = kwargs.get("pitch")
-        return self.generateChords(pitchIn, 200)
+        numChords = kwargs.get("maxChords")
+        return self.generateChords(pitchIn, numChords)
 
 
     def generateChords(self, pitchIn, numChords):
         chordList = []
         notesList = []  
-        
-
         #generates base note and pitch class
         for x in range (0,numChords):
             notes = []
@@ -53,14 +52,3 @@ class NumNotes(Rule):
 
     def ruleCheck(self, **kwargs):
         return True
-        #progression = kwargs.get("progression", None)
-        #chordsIn = progression.chords
-        #chordsOut = []
-        #chordsOut = chordsIn
-        #return Progression(chordsOut)
-
-        
-
-
-    #findNumNotes() method in chord class finds number of notes
-

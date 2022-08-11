@@ -6,10 +6,12 @@ from chord import Chord
 class Composer:
     
     #init function
-    def __init__(self,pitches, rules):
-        self.pitches=pitches
+    def __init__(self, pitches, rules, maxChords, maxRetries):
+        self.pitches = pitches
         self.rules = rules # a list of rule 
         self.progressions = [] # holds instances of progressions
+        self.maxChords = maxChords
+        self.maxRetries = maxRetries
 
     #generate chord progression function
     def makeChordProgression(self):        
@@ -24,7 +26,8 @@ class Composer:
                     possibleChords = rule.getPossibleChords(
                         pitchIdx=pitchIdx,
                         pitch=self.pitches[pitchIdx],
-                        prevChord=None
+                        prevChord=None,
+                        maxChords=self.maxChords
                     )
                     if (possibleChords != None):
                         for chord in possibleChords:
@@ -36,7 +39,8 @@ class Composer:
                             pitchIdx=pitchIdx,
                             pitch=self.pitches[pitchIdx],
                             progression=progression,
-                            prevChord=progression.chords[len(progression.chords)-1]
+                            prevChord=progression.chords[len(progression.chords)-1],
+                            maxChords=self.maxChords
                         )
                         if (possibleChords != None):
                             for chord in possibleChords:
