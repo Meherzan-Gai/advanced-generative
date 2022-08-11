@@ -20,7 +20,7 @@ def format_train_data(path, filename):
     final = working_df.stack(level=0).to_frame().T
     final.columns = final.columns.map(lambda x: '_'.join([str(i) for i in x]))
 
-    note_name = filename[:filename.index('.')]
+    note_name = filename[:filename.index('v')]
     target = librosa.note_to_hz(note_name)
     final['TrgtFreq'] = target
 
