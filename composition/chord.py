@@ -47,3 +47,13 @@ class Chord:
     #finds and returns the number of notes in the chord
     def findNumNotes(self):
         return len(self.stack)
+
+    def clone(self):
+        return Chord(self.stack)
+
+    def __str__ (self):
+        noteString = "["
+        for note in self.stack:
+            noteString += str(note) + ", "
+        noteString = noteString[:-2]
+        return noteString + "]"

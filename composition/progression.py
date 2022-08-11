@@ -1,4 +1,4 @@
-
+from chord import Chord
 class Progression:
 
     def __init__(self, chords):
@@ -23,6 +23,16 @@ class Progression:
         return Progression(newChordList)
         
     def clone(self):
-        return Progression(self.chords)   
+        newChordList = []
+        for chord in self.chords:
+            newChordList.append(chord.clone())
+        return Progression(newChordList)  
+
     def delete(self):
         del self
+
+    def __str__(self):
+        progressionString = ""
+        for chord in self.chords:
+            progressionString += str(chord) + ", "
+        return progressionString[:-2]
