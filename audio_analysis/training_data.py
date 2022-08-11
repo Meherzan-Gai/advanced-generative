@@ -28,7 +28,7 @@ def format_train_data(path, filename):
 
 def main():
     # notes in sample folders are just for testing
-    for root, dirs, files in os.walk(os.getcwd() + '/audio_analysis/samples'):
+    for root, dirs, files in os.walk(f'{os.getcwd()}/audio_analysis/samples'):
         pass
     paths = list(map(lambda file: f'{root}/{file}', files))
 
@@ -38,6 +38,8 @@ def main():
     
     result = pd.concat(frames, ignore_index=True)
     print(result)
+
+    result.to_csv(path_or_buf=f'{os.getcwd()}/audio_analysis/notes.csv')
 
 if __name__ == '__main__':
     main()
