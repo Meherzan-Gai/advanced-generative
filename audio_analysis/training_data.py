@@ -12,17 +12,17 @@ def format_train_data(path, filename):
     note = S[:, onsets[0]:]
     data = analyzer.get_note_data(note, num_bins=30)
 
-    df = pd.DataFrame(data.T, columns=['Frequency Bin', 'Max. Magnitude', 'Min. Magnitude', 'Avg. Magnitude', 'SD Magnitude', 'Avg. Difference', 'SD Difference'])
-    df.sort_values('Avg. Magnitude', inplace=True, ascending=False)
+    df = pd.DataFrame(data.T, columns=['FreqBin', 'MaxMag', 'MinMag', 'AvgMag', 'SDMag', 'AvgDiff', 'SDDiff'])
+    df.sort_values('AvgMag', inplace=True, ascending=False, ignore_index=True)
 
     # does not include freq bin number
-    working_df = df.iloc[0:5, 1:]
-    final = working_df.unstack().to_frame().sort_index(level=1).T
-    final.columns = final.columns.map(' '.join)
+    working_df = df.iloc[0:5]
+    final = working_df.stack(level=0).to_frame().T
+    final.columns = final.columns.map(lambda x: '_'.join([str(i) for i in x]))
 
     note_name = filename[:filename.index('.')]
     target = librosa.note_to_hz(note_name)
-    final['Target Frequency'] = target
+    final['TrgtFreq'] = target
 
     return final
 
@@ -30,10 +30,14 @@ def main():
     # notes in sample folders are just for testing
     for root, dirs, files in os.walk(os.getcwd() + '/audio_analysis/samples'):
         pass
-
     paths = list(map(lambda file: f'{root}/{file}', files))
-    for path in paths:
-        print(format_train_data(path))
+
+    frames = []
+    for i in range(len(paths)):
+        frames.append(format_train_data(paths[i], files[i]))
+    
+    result = pd.concat(frames, ignore_index=True)
+    print(result)
 
 if __name__ == '__main__':
     main()
