@@ -1,12 +1,18 @@
 from chord import Chord
 from progression import Progression
 
-class VoicingRule:
+class Voicing:
 
-    def __init__(self,progression,pitches):
+    def __init__(self):
         self.shiftAmt = 12
+
+    def setProgression(self,progression):
         self.progression = progression
-        self.pitches = pitches
+
+    def setMelody(self,melody):
+        self.pitches = melody
+
+
 
     def getVoicing(self):
         self.setShiftAmt()
@@ -18,9 +24,9 @@ class VoicingRule:
         bassNotes = []
         for chord in self.progression.chords:
             bassNotes.append(chord.stack[0])
-        progressionHigh = VoicingRule.getHighest(bassNotes)
-        pitchLow = VoicingRule.getLowest(self.pitches)
-        pitchHigh = VoicingRule.getHighest(self.pitches)
+        progressionHigh = Voicing.getHighest(bassNotes)
+        pitchLow = Voicing.getLowest(self.pitches)
+        pitchHigh = Voicing.getHighest(self.pitches)
 
         if (pitchHigh<36):
             self.shiftAmt = 48

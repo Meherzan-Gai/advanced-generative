@@ -49,7 +49,10 @@ class Chord:
         return len(self.stack)
 
     def clone(self):
-        return Chord(self.stack)
+        notesList = []
+        for note in self.stack:
+            notesList.append(note)
+        return Chord(notesList)
 
     def __str__ (self):
         noteString = "["

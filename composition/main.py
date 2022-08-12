@@ -2,7 +2,7 @@
 from multiprocessing.sharedctypes import Value
 from typing import Type
 from composer import Composer
-from voicing import VoicingRule
+from voicing import Voicing
 from progression import Progression
 from chord import Chord
 from rules.rule import Rule
@@ -45,6 +45,7 @@ if __name__ == "__main__":
     print()
     if (len(composer.progressions) > 0):
         player = Player("composition/player.mid")
+        voicer = Voicing()
         programQuit = True
         while programQuit:
             choice = input("Type 1 to hear progressions, 2 to download progressions, or 3 to end the program: ")
@@ -55,17 +56,21 @@ if __name__ == "__main__":
                     try:
                         option = input("Choose a progression to hear or type 'q' to quit: ")
                         print()
-                        if (option == "q"):
+                        if (option == 'q'):
                             pressQuit = False
-                        option = int(option)
-                        progressionChosen = composer.progressions[option-1].clone()
-                        voicer = VoicingRule(progressionChosen,melody)
-                        voicer.getVoicing()
-                        player.writeMusic(voicer.progression, melody)
-                        for chord in voicer.progression.chords:
-                            print(chord.stack)
-                        player.playMusic()
-                        
+                        else:
+                            option = int(option)
+                            progressionChosen = composer.progressions[option-1]
+                            progressionIn = progressionChosen.clone()
+                            melodyIn = melody[:]
+                            voicer.setProgression(progressionIn)
+                            voicer.setMelody(melodyIn)
+                            voicer.getVoicing()
+                            player.writeMusic(voicer.progression, melodyIn)
+                            for chord in voicer.progression.chords:
+                                print(chord.stack)
+                            player.playMusic()
+                            
                         
 
                     except IndexError:

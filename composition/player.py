@@ -61,7 +61,11 @@ class Player:
         clock = pygame.time.Clock()
         try:
             pygame.mixer.music.load(self.fileName)
+            print()
             print("Music Loaded")
+            print()
+            print("Now Playing")
+            print()
         except pygame.error:
             print("File %s not found! (%s)" % (self.fileName, pygame.get_error()))
             return
