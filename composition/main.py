@@ -14,7 +14,6 @@ from rules.basenote import BaseNote
 import json
 from pcsets.pcset import PcSet as ps
 from player import Player
-import librosa
 
 # use this as a template for importing all your classes
 # SharedTone rule is setup correctly, so also use that as template for structuring all other rule imports
@@ -66,9 +65,9 @@ if __name__ == "__main__":
                             voicer.setProgression(progressionIn)
                             voicer.setMelody(melodyIn)
                             voicer.getVoicing()
+                            voicer.progression.arrChords()
                             player.writeMusic(voicer.progression, melodyIn)
-                            for chord in voicer.progression.chords:
-                                print(chord.stack)
+                            print(voicer.progression)
                             player.playMusic()
                             
                         

@@ -1,5 +1,6 @@
 #importing pitch class set module (pcsets)
 from pcsets.pcset import PcSet as ps
+import librosa
 
 class Chord:
 
@@ -48,6 +49,12 @@ class Chord:
     def findNumNotes(self):
         return len(self.stack)
 
+    def arrNotes(self):
+        bassNote = self.stack[0]
+        notes = sorted(self.stack[1:])
+        notes.insert(0,bassNote)
+        self.stack=notes
+
     def clone(self):
         notesList = []
         for note in self.stack:
@@ -57,6 +64,6 @@ class Chord:
     def __str__ (self):
         noteString = "["
         for note in self.stack:
-            noteString += str(note) + ", "
+            noteString += librosa.midi_to_note(note) + ", "
         noteString = noteString[:-2]
         return noteString + "]"

@@ -36,3 +36,7 @@ class Progression:
         for chord in self.chords:
             progressionString += str(chord) + ", "
         return progressionString[:-2]
+
+    def arrChords(self):
+        for chord in self.chords:
+            chord.arrNotes()
