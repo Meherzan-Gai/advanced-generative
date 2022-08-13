@@ -24,6 +24,8 @@ if __name__ == "__main__":
     with open('composition/config/config.json', 'r') as inputFile:
         ruleData = json.load(inputFile)
         melody = ruleData.get("Input").get("melody")
+        key = ruleData.get("Input").get("key")
+        Chord.setKey(key)
         maxRetries = ruleData.get("Settings").get("maxRetries")
         maxChords = ruleData.get("Settings").get("maxChords")
         rule2 = NumNotes(ruleData.get("NumNotes").get("priority"),ruleData.get("NumNotes").get("numNotes"))

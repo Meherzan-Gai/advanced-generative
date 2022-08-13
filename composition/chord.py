@@ -3,6 +3,7 @@ from pcsets.pcset import PcSet as ps
 import librosa
 
 class Chord:
+    key = "C:maj"
 
     def __init__(self, stack):
         self.stack = stack
@@ -61,9 +62,12 @@ class Chord:
             notesList.append(note)
         return Chord(notesList)
 
-    def __str__ (self):
+    def __str__(self):
         noteString = "["
         for note in self.stack:
-            noteString += librosa.midi_to_note(note) + ", "
+            noteString += librosa.midi_to_note(note, key = Chord.key) + ", "
         noteString = noteString[:-2]
         return noteString + "]"
+
+    def setKey(key):
+        Chord.key = key
