@@ -21,10 +21,45 @@ class Rule(object):
     #deletes progressions that don't fit rules
     def checkProgression(self, **kwargs):
         rules = kwargs.get("rules")
-        for rule in rules:
+        ruleLimit = kwargs.get("ruleLimit")
+        for rule in rules[0:ruleLimit]:
             if (rule.ruleCheck(**kwargs) == False):
                 return False
         return True
+
+    def trimProgressions(**kwargs):
+        workingProgressions=[]
+        progressions = kwargs.get("progressions")
+        rules = kwargs.get("rules")
+        pitchIdx = kwargs.get("pitchIdx")
+        pitch = kwargs.get("pitch")
+        ruleIdx = len(rules)
+        print("STARTING NEXT INDEX")
+        print()
+        print()
+        while(len(workingProgressions)==0 and ruleIdx>=0):
+            for progression in progressions:
+                chordWorks = []
+                for rule in rules[0:ruleIdx]:
+                    print(rule)
+                    chordWorks.append(rule.ruleCheck(
+                        rules = rules,
+                        pitchIdx=pitchIdx,
+                        pitch = pitch,
+                        prevChord=progression.chords[len(progression.chords)-2],
+                        newChord=progression.chords[len(progression.chords)-1],
+                        progression=progression
+                    ))
+                print()
+                print()
+                print("NEW PROGRESSION TESTING")
+                print(progression)
+                print(chordWorks)
+                if (chordWorks.count(False)==0):
+                    workingProgressions.append(progression)
+            ruleIdx-=1
+        print(len(workingProgressions))
+        return workingProgressions
             
 
 

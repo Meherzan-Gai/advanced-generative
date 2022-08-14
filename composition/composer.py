@@ -2,6 +2,7 @@
 from threading import activeCount
 from progression import Progression
 from chord import Chord
+from rules.rule import Rule
 
 class Composer:
     
@@ -48,18 +49,24 @@ class Composer:
 
 
             #DELETING PROGRESSIONS THAT DON'T WORK
-            for progression in nextProgressions:
-                chordWorks = rule.checkProgression(
-                    rules = self.rules,
-                    pitchIdx=pitchIdx,
-                    pitch=self.pitches[pitchIdx],
-                    prevChord=progression.chords[len(progression.chords)-2],
-                    newChord=progression.chords[len(progression.chords)-1],
-                    progression=progression
-                )
-                if (chordWorks):
-                    activeProgressions.append(progression)
+            #for progression in nextProgressions:
+            #    chordWorks = rule.checkProgression(
+            #        rules = self.rules,
+            #        pitchIdx=pitchIdx,
+            #        pitch=self.pitches[pitchIdx],
+            #        prevChord=progression.chords[len(progression.chords)-2],
+            #        newChord=progression.chords[len(progression.chords)-1],
+            #        progression=progression
+            #    )
+            #    if (chordWorks):
+            #        activeProgressions.append(progression)
 
+            activeProgressions = Rule.trimProgressions(
+                progressions = nextProgressions,
+                rules = self.rules,
+                pitchIdx = pitchIdx,
+                pitch = self.pitches[pitchIdx]
+                )
             pitchIdx += 1
 
             #REMOVING OLD PROGRESSIONS 
