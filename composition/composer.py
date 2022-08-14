@@ -34,17 +34,18 @@ class Composer:
                         for chord in possibleChords:
                             nextProgressions.append(Progression([chord]))
             else:
-                for progression in activeProgressions:
-                    for rule in self.rules:
-                        possibleChords = rule.getPossibleChords(
-                            pitchIdx=pitchIdx,
-                            pitch=self.pitches[pitchIdx],
-                            progression=progression,
-                            prevChord=progression.chords[len(progression.chords)-1],
-                            maxChords=self.maxChords
-                        )
-                        if (possibleChords != None):
-                            for chord in possibleChords:
+                #for progression in activeProgressions: COMMENTED OUT TO NOT GENERATE RANDOM CHORDS FOR EACH PROGRESSION
+                for rule in self.rules:
+                    possibleChords = rule.getPossibleChords(
+                        pitchIdx=pitchIdx,
+                        pitch=self.pitches[pitchIdx],
+                        #progression=progression,
+                        #prevChord=progression.chords[len(progression.chords)-1],
+                        maxChords=self.maxChords
+                    )
+                    if (possibleChords != None):
+                        for chord in possibleChords:
+                            for progression in activeProgressions: #GET RID OF THIS LINE TO GO BACK TO OLD VERSION
                                 nextProgressions.append(progression.appendChord(chord))
 
 
