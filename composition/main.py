@@ -49,7 +49,7 @@ if __name__ == "__main__":
         voicer = Voicing()
         programQuit = True
         while programQuit:
-            choice = input("Type 1 to hear progressions, 2 to download progressions, or 3 to end the program: ")
+            choice = input("Type 1 to hear progressions, 2 to download progressions, 3 to rerun progressions or 4 to end the program: ")
             print()
             if (choice == "1"):
                 pressQuit = True
@@ -87,6 +87,9 @@ if __name__ == "__main__":
                 pass
             
             elif (choice == "3"):
+                pass
+
+            elif (choice == "4"):
                 break
 
             else:

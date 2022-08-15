@@ -16,11 +16,9 @@ class Progression:
         #newProgression.chords.append(chord)
         #return newProgression
 
-        newChordList =[]
-        for thisChord in self.chords:
-            newChordList.append(thisChord)
-        newChordList.append(chord)
-        return Progression(newChordList)
+        newProgression = self.clone()
+        newProgression.chords.append(chord.clone())
+        return newProgression
         
     def clone(self):
         newChordList = []

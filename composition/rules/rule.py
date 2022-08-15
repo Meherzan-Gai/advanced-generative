@@ -34,9 +34,9 @@ class Rule(object):
         pitchIdx = kwargs.get("pitchIdx")
         pitch = kwargs.get("pitch")
         ruleIdx = len(rules)
-        print("STARTING NEXT INDEX")
-        print()
-        print()
+        #print("STARTING NEXT INDEX")
+        #print()
+        #print()
         while(len(workingProgressions)==0 and ruleIdx>=0):
             for progression in progressions:
                 chordWorks = []
@@ -50,11 +50,11 @@ class Rule(object):
                         newChord=progression.chords[len(progression.chords)-1],
                         progression=progression
                     ))
-                print()
-                print()
-                print("NEW PROGRESSION TESTING")
-                print(progression)
-                print(chordWorks)
+                #print()
+                #print()
+                #print("NEW PROGRESSION TESTING")
+                #print(progression)
+                #print(chordWorks)
                 if (chordWorks.count(False)==0):
                     workingProgressions.append(progression)
             ruleIdx-=1
