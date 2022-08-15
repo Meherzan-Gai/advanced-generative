@@ -66,7 +66,6 @@ class Chord:
         noteString = "["
         for note in self.stack:
             noteString += librosa.midi_to_note(note, key = Chord.key) + ", "
-            noteString += "btw:" + str(note)+ "    , "
         noteString = noteString[:-2]
         
         return noteString + "]"

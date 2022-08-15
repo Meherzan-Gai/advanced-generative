@@ -41,7 +41,7 @@ class Rule(object):
             for progression in progressions:
                 chordWorks = []
                 for rule in rules[0:ruleIdx]:
-                    print(rule)
+                    #print(rule)
                     chordWorks.append(rule.ruleCheck(
                         rules = rules,
                         pitchIdx=pitchIdx,
