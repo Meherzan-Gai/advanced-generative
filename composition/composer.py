@@ -66,8 +66,13 @@ class Composer:
                 progressions = nextProgressions,
                 rules = self.rules,
                 pitchIdx = pitchIdx,
-                pitch = self.pitches[pitchIdx]
+                pitch = self.pitches[pitchIdx],
+                retriesOn = (self.maxRetries>0)
                 )
+            
+            if (len(activeProgressions)==0):
+                exit("Sorry no possible progressions were generated with the current input. Try rerunning the program or changing some of the rules")
+                
             pitchIdx += 1
 
             #REMOVING OLD PROGRESSIONS 
