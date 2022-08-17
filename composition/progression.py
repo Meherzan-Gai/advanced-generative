@@ -38,3 +38,12 @@ class Progression:
     def arrChords(self):
         for chord in self.chords:
             chord.arrNotes()
+
+    def octaveUp(self):
+        for chord in self.chords:
+            chord.octaveUp()
+    
+    def octaveDown(self):
+        for chord in self.chords:
+            chord.octaveDown()
+            

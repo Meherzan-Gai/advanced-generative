@@ -70,5 +70,22 @@ class Chord:
         
         return noteString + "]"
 
+    def octaveUp(self):
+        for noteIdx in range(0,len(self.stack),1):
+            self.stack[noteIdx]+=12
+            if (self.stack[noteIdx]>127):
+                print("Warning: Note is above maximum pitch of 127, pitching down to 127")
+                print()
+                self.stack[noteIdx]=127
+
+    def octaveDown(self):
+        for noteIdx in range(0,len(self.stack),1):
+            self.stack[noteIdx]-=12
+            if (self.stack[noteIdx]<0):
+                print("Warning: Note is below minimum pitch of 0, pitching up to 0")
+                print()
+                self.stack[noteIdx]=0
+
+
     def setKey(key):
         Chord.key = key
