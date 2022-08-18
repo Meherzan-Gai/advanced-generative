@@ -37,7 +37,6 @@ if __name__ == "__main__":
     ruleList = [rule1,rule2,rule3,rule4,rule5]
     ruleList = sorted(ruleList, key=lambda rule: rule.getPriority()) #SORTS RULES
 
-    melody = [n+12 for n in melody]
     composer = Composer(melody, ruleList, maxChords, maxRetries)
     composer.makeChordProgression()
     composer.printProgressions()
@@ -52,16 +51,17 @@ if __name__ == "__main__":
             choice = input("Type 1 to hear progressions, 2 to download progressions, 3 to rerun progressions or 4 to end the program: ")
             print()
             if (choice == "1"):
-                pressQuit = True
-                while pressQuit:
+                hearQuit = False
+                while (hearQuit == False):
                     try:
-                        option = input("Choose a progression to hear or type 'q' to quit: ")
+                        hearOption = input("Choose a progression to hear or type 'q' to quit: ")
                         print()
-                        if (option == 'q'):
-                            pressQuit = False
+                        if (hearOption == 'q'):
+                            hearQuit = True
                         else:
-                            option = int(option)
-                            progressionChosen = composer.progressions[option-1]
+                            hearOption = int(hearOption)
+                            print("Progression #"+str(hearOption)+" selected:")
+                            progressionChosen = composer.progressions[hearOption-1]
                             progressionIn = progressionChosen.clone()
                             melodyIn = melody[:]
                             voicer.setProgression(progressionIn)
@@ -71,7 +71,63 @@ if __name__ == "__main__":
                             player.writeMusic(voicer.progression, melodyIn)
                             print(voicer.progression)
                             player.playMusic()
-                            
+
+                            progressionQuit = False
+                            while(progressionQuit == False):
+                                #try:
+                                progressionOption = input("Type '1' to download the progression, '2' to transpose the progression up one octave, '3' to transpose the progression AND the melody up one octave, '4' to transpose the progression down one octave, '5' to transpose the progression AND the melody down one octave, or '6' to hear another progression: ")
+                                progressionOption = int(progressionOption)
+                                if (progressionOption == 1):
+                                    pass
+                                
+                                elif (progressionOption == 2):
+                                    voicer.progression.octaveUp()
+                                    player.writeMusic(voicer.progression, melodyIn)
+                                    print(voicer.progression)
+                                    player.playMusic()
+
+                                elif (progressionOption == 3):
+                                    voicer.progression.octaveUp()
+                                    for noteIdx in range(0,len(melodyIn),1):
+                                        melodyIn[noteIdx]+=12
+                                        if (melodyIn[noteIdx]>127):
+                                            print("Warning: One or more notes in the melody is above the maximum pitch value of 127 and has been resolved to 127")
+                                            print()
+                                            melodyIn[noteIdx]=127
+                                    player.writeMusic(voicer.progression, melodyIn)
+                                    print(voicer.progression)
+                                    player.playMusic()    
+                                
+                                elif (progressionOption == 4):
+                                    voicer.progression.octaveDown()
+                                    player.writeMusic(voicer.progression, melodyIn)
+                                    print(voicer.progression)
+                                    player.playMusic()
+
+                                elif (progressionOption == 5):
+                                    voicer.progression.octaveDown()
+                                    for noteIdx in range(0,len(melodyIn),1):
+                                        melodyIn[noteIdx]-=12
+                                        if (melodyIn[noteIdx]<0):
+                                            print("Warning: One or more notes in the melody is below the minimum pitch value of 0 and has been resolved to 0")
+                                            print()
+                                            melodyIn[noteIdx]=0
+                                    player.writeMusic(voicer.progression, melodyIn)
+                                    print(voicer.progression)
+                                    player.playMusic()
+
+                                elif (progressionOption == 6):
+                                    progressionQuit = True
+                                    print()
+                                
+                                else:
+                                    print()
+                                    print("Please enter a valid input")
+                                    print()
+                                #except ValueError:
+                                    #print()
+                                    #print("Error: Value not recognized")
+                                    #print()
                         
 
                     except IndexError:
@@ -95,3 +151,8 @@ if __name__ == "__main__":
             else:
                 print("Error: Please enter a valid input")
                 print()
+
+
+
+def download():
+    pass
