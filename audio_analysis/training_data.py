@@ -39,7 +39,7 @@ def main():
     result = pd.concat(frames, ignore_index=True)
     print(result)
 
-    result.to_csv(path_or_buf=f'{os.getcwd()}/audio_analysis/notes.csv')
+    result.to_csv(path_or_buf=f'{os.getcwd()}/audio_analysis/notes.csv', index=False)
 
 if __name__ == '__main__':
     main()
