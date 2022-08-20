@@ -12,8 +12,8 @@ def format_train_data(path, filename):
     note = S[:, onsets[0]:]
     data = analyzer.get_note_data(note, num_bins=30)
 
-    df = pd.DataFrame(data.T, columns=['FreqBin', 'MaxMag', 'MinMag', 'AvgMag', 'SDMag', 'AvgDiff', 'SDDiff'])
-    df.sort_values('AvgMag', inplace=True, ascending=False, ignore_index=True)
+    df = pd.DataFrame(data.T, columns=['frequency_bin', 'max_magnitude', 'min_magnitude', 'avg_magnitude', 'sd_magnitude', 'avg_difference', 'sd_difference'])
+    df.sort_values('avg_magnitude', inplace=True, ascending=False, ignore_index=True)
 
     # does not include freq bin number
     working_df = df.iloc[0:5]
@@ -22,7 +22,7 @@ def format_train_data(path, filename):
 
     note_name = filename[:filename.index('v')]
     target = librosa.note_to_hz(note_name)
-    final['TrgtFreq'] = target
+    final['target_frequency'] = target
 
     return final
 
