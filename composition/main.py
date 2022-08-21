@@ -56,15 +56,15 @@ if __name__ == "__main__":
     if (len(composer.progressions) > 0):
         player = Player("composition/player.mid")
         voicer = Voicing()
-        programQuit = True
-        while programQuit:
+        programQuit = False
+        while (programQuit == False):
             choice = input("Type 1 to hear progressions, 2 to rerun progression generator, or 3 to end the program: ")
             print()
             if (choice == "1"):
                 hearQuit = False
                 while (hearQuit == False):
                     try:
-                        hearOption = input("Choose a progression to hear or type 'q' to quit: ")
+                        hearOption = input("Choose a progression to hear or type 'q' to quit to the menu: ")
                         print()
                         if (hearOption == 'q'):
                             hearQuit = True
@@ -153,10 +153,10 @@ if __name__ == "__main__":
             
             elif (choice == "2"):
                 composer.makeChordProgression()
-                composer.printProgressions
+                composer.printProgressions()
 
             elif (choice == "3"):
-                break
+                programQuit=True
 
             else:
                 print("Error: Please enter a valid input")
