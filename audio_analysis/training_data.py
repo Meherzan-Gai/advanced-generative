@@ -1,7 +1,6 @@
 import os
 import os.path
 import librosa
-import numpy as np
 import pandas as pd
 
 import analyzer
@@ -40,8 +39,17 @@ def main():
     for i in range(len(paths)):
         frames.append(format_train_data(paths[i], files[i]))
 
+    frequencies = librosa.fft_frequencies(sr=22050, n_fft=2048)
+    def bin_to_note(bin):
+        return librosa.hz_to_note(frequencies[int(bin)])
+
     result = pd.concat(frames, ignore_index=True)
-    result.insert(0, 'sample_id', range(0, len(result)))
+    result['0_note'] = result['0_frequency_bin'].apply(bin_to_note)
+    result['1_note'] = result['1_frequency_bin'].apply(bin_to_note)
+    result['2_note'] = result['2_frequency_bin'].apply(bin_to_note)
+    result['3_note'] = result['3_frequency_bin'].apply(bin_to_note)
+    result['4_note'] = result['4_frequency_bin'].apply(bin_to_note)
+    result['target_note'] = result['target_frequency'].apply(librosa.hz_to_note)
     print(result)
 
     result.to_csv(path_or_buf=f'{os.getcwd()}/notes.csv', index=False)

@@ -1,5 +1,6 @@
-librosa
+librosa~=0.9.2
 matplotlib
-pandas
+pandas~=1.4.3
 scikit-learn
-sdv
+sdv~=0.16.0
+numpy~=1.22.4

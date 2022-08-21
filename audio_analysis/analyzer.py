@@ -1,16 +1,16 @@
-import os.path
 import librosa
 import librosa.onset
 import numpy as np
-import pandas as pd
+
 
 def get_audio_info(path, n_fft=2048):
     y, sr = librosa.load(path)
-    
+
     S = np.abs(librosa.stft(y, n_fft=n_fft))
     freq_range = librosa.fft_frequencies(sr=sr, n_fft=n_fft)
     o_env = librosa.onset.onset_strength(y=y, sr=sr, max_size=S.shape[0])
-    onsets = librosa.onset.onset_detect(onset_envelope=o_env, sr=sr, units='frames', pre_max=3, post_max=3, pre_avg=3, post_avg=5)
+    onsets = librosa.onset.onset_detect(onset_envelope=o_env, sr=sr, units='frames', pre_max=3, post_max=3, pre_avg=3,
+                                        post_avg=5)
 
     # onset strength graph
     # import matplotlib.pyplot as plt
@@ -22,6 +22,7 @@ def get_audio_info(path, n_fft=2048):
     # plt.show()
 
     return S, freq_range, onsets
+
 
 def get_note_data(note, num_bins=3):
     # list of the maximum values of each bin across the frames
