@@ -1,26 +1,33 @@
-import os
-import librosa
 import pandas as pd
-# from sdv.lite import TabularPreset
-from sdv.tabular import GaussianCopula
 
-
-def generate_data():
-    import os
-
-    file = f'{os.getcwd()}/notes.csv'
-    note_data = pd.read_csv(file, header=0)
-
-    # model = TabularPreset(name='FAST_ML', metadata=metadata)
-    model = GaussianCopula()
-    model.fit(note_data)
-
-    synthetic_data = model.sample(num_rows=100)
-    return synthetic_data
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_squared_error
 
 
 if __name__ == '__main__':
-    frequencies = librosa.fft_frequencies(sr=22050, n_fft=2048)
+    import os
 
-    working_df = generate_data()
-    working_df.to_csv(path_or_buf=f'{os.getcwd()}/gaussian_copula_notes.csv', index=False)
+    notes = f'{os.getcwd()}/notes.csv'
+    test_df = pd.read_csv(notes, header=0)
+
+    gc_notes = f'{os.getcwd()}/gaussian_copula_notes.csv'
+    train_df = pd.read_csv(gc_notes, header=0)
+
+    X_test, y_test = test_df.iloc[:, 0:71], test_df.iloc[:, 70]
+    X_train, y_train = train_df.iloc[:, 0:71], train_df.iloc[:, 70]
+
+    # TODO: Use GridSearchCV to evaluate different param values
+
+    # fitting with synthetic data
+    rfr = RandomForestRegressor(n_estimators=100, max_depth=None)
+    rfr.fit(X_train, y_train)
+
+    # testing with real data
+    y_predict = rfr.predict(X_test)
+
+    mse = mean_squared_error(y_test, y_predict)
+    rmse = mse**.5
+
+    # current error is bad likely because synthetic is yet to be adjusted
+    print(mse)
+    print(rmse)
