@@ -88,4 +88,7 @@ class Chord:
 
 
     def setKey(key):
-        Chord.key = key
+        if (key == "None"):
+            key = "C:maj"
+        else:
+            Chord.key = key
