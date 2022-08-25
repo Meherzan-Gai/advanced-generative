@@ -3,33 +3,34 @@ import os.path
 import librosa
 import pandas as pd
 
-import analyzer
+from audio_analysis import analyzer
 
 
-def get_sample_data(path, filename, num_bins):
+def get_sample_data(path: str, filename: str, n_bins_per_sample) -> pd.DataFrame:
     S, freq_range, onsets = analyzer.get_audio_info(path)
 
     note = S[:, onsets[0]:]
-    data = analyzer.get_note_data(note, num_bins=100)
+    note_data = analyzer.get_note_data(note, n_bins=100)
 
-    df = pd.DataFrame(data.T,
+    df = pd.DataFrame(note_data.T,
                       columns=['frequency_bin', 'max_magnitude', 'min_magnitude', 'avg_magnitude', 'sd_magnitude',
                                'avg_difference', 'sd_difference'])
     df.sort_values('avg_magnitude', inplace=True, ascending=False, ignore_index=True)
 
     # does not include freq bin number
-    working_df = df.iloc[0:num_bins]
+    working_df = df.iloc[0:n_bins_per_sample]
     final = working_df.stack(level=0).to_frame().T
     final.columns = final.columns.map(lambda x: '_'.join([str(i) for i in x]))
 
     note_name = filename[:filename.index('v')]
     target = librosa.note_to_hz(note_name)
     final['target_frequency'] = target
+    final['file_name'] = filename
 
     return final
 
 
-def format_train_data(num_bins=10):
+def format_train_data(n_bins_per_sample=10):
     # notes in sample folders are just for testing
     for root, dirs, files in os.walk(f'{os.getcwd()}/samples'):
         pass
@@ -37,24 +38,14 @@ def format_train_data(num_bins=10):
 
     frames = []
     for i in range(len(paths)):
-        frames.append(get_sample_data(paths[i], files[i], num_bins=num_bins))
-
-    frequencies = librosa.fft_frequencies(sr=22050, n_fft=2048)
+        frames.append(get_sample_data(paths[i], files[i], n_bins_per_sample=n_bins_per_sample))
 
     result = pd.concat(frames, ignore_index=True)
-
-    # columns to view bins/hz in note notation
-    # def bin_to_note(b):
-    #     return librosa.hz_to_note(frequencies[int(b)])
-    #
-    # for i in range(0, num_bins):
-    #     result[f'{i}_note'] = result[f'{i}_frequency_bin'].apply(bin_to_note)
-    # result['target_note'] = result['target_frequency'].apply(librosa.hz_to_note)
 
     return result
 
 
 if __name__ == '__main__':
-    data = format_train_data(num_bins=10)
+    data = format_train_data(n_bins_per_sample=10)
     print(data)
     data.to_csv(path_or_buf=f'{os.getcwd()}/notes.csv', index=False)

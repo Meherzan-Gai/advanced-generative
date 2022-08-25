@@ -37,15 +37,19 @@ def analyze_audio_file(path, n_fft=2048, for_ML=False):
 
 
 if __name__ == '__main__':
+    # Range of allowed notes is C3-C5
+    # Bounds for synthetic data
+    # Frequency: [130.8127826502993, 523.2511306011972]
+    # Bin:
+
     import os.path
 
-    dirname = os.path.dirname
-    PROJECT_ROOT = dirname(os.path.abspath(os.curdir))
+    PROJECT_ROOT = os.path.dirname(os.path.abspath(os.curdir))
 
     filepath = f'{PROJECT_ROOT}/audio_files/test_audio/test_piano_old.wav'
 
-    melody = analyze_audio_file(filepath, for_ML=False).tolist()
-    print(librosa.midi_to_note(melody))
+    m = analyze_audio_file(filepath, for_ML=False).tolist()
+    print(librosa.midi_to_note(m))
 
     with open(f'{PROJECT_ROOT}/midi_melodies/{os.path.basename(filepath)}.json', 'w') as out:
-        json.dump(melody, out)
+        json.dump(m, out)
