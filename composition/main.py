@@ -31,9 +31,12 @@ def arrProgression(progression,melody):
 
 if __name__ == "__main__":
     outputFile = Player('output.mid')
+    with open('test.json', 'r') as melodyFile:
+        melodyData = json.load(melodyFile)
+        melody = melodyData
+        
     with open('composition/config/config.json', 'r') as inputFile:
         ruleData = json.load(inputFile)
-        melody = ruleData.get("Input").get("melody")
         key = ruleData.get("Input").get("key")
         Chord.setKey(key)
         maxRetries = ruleData.get("Settings").get("maxRetries")
