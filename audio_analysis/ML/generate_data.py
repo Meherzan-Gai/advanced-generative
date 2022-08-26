@@ -3,7 +3,7 @@ import pandas as pd
 from sdv.tabular import GaussianCopula
 
 
-def generate_data(note_data):
+def generate_data(note_data) -> pd.DataFrame:
 
     # notable issues:
     # frequency bins don't line up with target freqs
