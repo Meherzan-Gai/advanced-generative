@@ -1,1 +1,4 @@
 librosa==0.9.1
+pcsets==2.0.0b2
+MIDIUtil==1.2.1
+pygame==2.1.2

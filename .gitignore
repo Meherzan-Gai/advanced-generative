@@ -1,2 +1,5 @@
 audio_files/*.mp3
 music
+generative-music-venv
+composition/player.mid
+output.mid
