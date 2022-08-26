@@ -1,5 +1,10 @@
 audio_files/*.mp3
 music
+
+__pycache__/
+.idea
+
 generative-music-venv
 composition/player.mid
 output.mid
+
