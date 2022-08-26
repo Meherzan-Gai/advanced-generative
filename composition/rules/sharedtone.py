@@ -1,11 +1,12 @@
 #imports
-from rules.base import Rule
+from rules.rule import Rule
 from chord import Chord
-
+from progression import Progression
+import random
 
 class SharedTone(Rule):
-    def __init__(self,numShared):
-        super().__init__()
+    def __init__(self,priority,numShared):
+        super().__init__(priority)
         self.numShared = numShared
         
     
@@ -13,22 +14,19 @@ class SharedTone(Rule):
     def getChords(self, **kwargs):
         prevChord = kwargs.get("prevChord", None)
         pitchIn = kwargs.get("pitch")
+        return self.generateChords(prevChord,pitchIn, 5)
 
-        if prevChord is None: # on first chord
+    
+    def generateChords(self, prevChord, pitchIn, cutoff):
+        return None
 
-            #PLACEHOLDER RETURNS MAJOR TRIAD AND MINOR SEVENTH
-            return [Chord([pitchIn,pitchIn+4,pitchIn+7]), Chord([pitchIn,pitchIn+3,pitchIn+7,pitchIn+10])]
+    def ruleCheck(self, **kwargs):
+        prevChord = kwargs.get("prevChord", None)
+        newChord = kwargs.get("newChord", None)
 
-        else:
+        if (prevChord!=None):
+            if (prevChord.numSharedPitches(newChord)<self.numShared):
+                return False
+        return True
 
-            #PLACEHOLDER RETURNS MAJOR SEVENTH AND MINOR TRIAD
-            return [Chord([pitchIn,pitchIn+4,pitchIn+7,pitchIn+11]), Chord([pitchIn,pitchIn+3,pitchIn+7])]
-
-    #find the number of shared notes between two chords
-    def numSharedBetween(chord1,chord2):
-        return chord1.numSharedPitches(chord2)
-
-    #find the pitches shared between two chords
-    def findShared(chord1,chord2):
-        return chord1.findSharedPitches(chord2)
 
