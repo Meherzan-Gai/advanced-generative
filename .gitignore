@@ -1,2 +1,4 @@
 audio_files/*.mp3
 music
+__pycache__/
+.idea
