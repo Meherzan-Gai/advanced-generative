@@ -28,8 +28,8 @@ def create_model(input_data: pd.DataFrame, use_fake_data=False, fake_data: pd.Da
         if fake_data is None:
             raise Exception('use_fake_data is True but no fake_data was specified')
 
-        X_test, y_test = input_data.iloc[:, 0:input_data.shape[1]], input_data.iloc[:, input_data.shape[1] - 1]
-        X_train, y_train = fake_data.iloc[:, 0:fake_data.shape[1]], fake_data.iloc[:, fake_data.shape[1] - 1]
+        X_test, y_test = input_data.iloc[:, 0:input_data.shape[1] - 1], input_data.iloc[:, input_data.shape[1] - 1]
+        X_train, y_train = fake_data.iloc[:, 0:fake_data.shape[1] - 1], fake_data.iloc[:, fake_data.shape[1] - 1]
 
     rfr = RandomForestRegressor(n_estimators=100, max_depth=None)
     rfr.fit(X_train, y_train)

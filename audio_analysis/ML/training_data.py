@@ -10,15 +10,10 @@ def _get_sample_data(path: str, filename: str, n_bins_per_sample: int) -> pd.Dat
     S, freq_range, onsets = analyzer.get_audio_info(path)
 
     note = S[:, onsets[0]:]
-    note_data = analyzer.get_note_data(note, n_bins=100, for_ML=True)
+    note_df = analyzer.get_note_data(note, n_bins=100, for_ML=True)
 
-    df = pd.DataFrame(note_data,
-                      columns=['frequency_bin', 'max_magnitude', 'min_magnitude', 'avg_magnitude', 'sd_magnitude',
-                               'avg_difference', 'sd_difference'])
-    df.sort_values('avg_magnitude', inplace=True, ascending=False, ignore_index=True)
-
-    # does not include freq bin number
-    working_df = df.iloc[0:n_bins_per_sample]
+    # does not include freq b number
+    working_df = note_df.iloc[0:n_bins_per_sample]
     final = working_df.stack(level=0).to_frame().T
     final.columns = final.columns.map(lambda x: '_'.join([str(i) for i in x]))
 
@@ -50,4 +45,4 @@ if __name__ == '__main__':
     files = os.listdir(samples_path)
 
     data = format_train_data(samples_path, n_bins_per_sample=10)
-    data.to_csv(path_or_buf=f'{ML_dir}/note_data/mp3_notes.csv', index=False)
+    data.to_csv(path_or_buf=f'{ML_dir}/note_data/mp3_notes1.csv', index=False)

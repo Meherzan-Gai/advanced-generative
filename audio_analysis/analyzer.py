@@ -23,7 +23,7 @@ def get_audio_info(path, n_fft=2048):
     return S, freq_range, onsets
 
 
-def get_note_data(note, n_bins, for_ML=False) -> np.ndarray:
+def get_note_data(note, n_bins, for_ML=False):
     # list of the maximum values of each bin across the frames
     bin_maxes = np.amax(note, axis=1)
     # nth highest bins ordered from least to greatest
@@ -37,13 +37,21 @@ def get_note_data(note, n_bins, for_ML=False) -> np.ndarray:
         data = np.concatenate(([bins], [avg_magnitudes]), axis=0)
         return data.T
 
-    max_magnitudes = np.max(bin_magnitudes, axis=1)
-    min_magnitudes = np.min(bin_magnitudes, axis=1)
-    std_magnitudes = np.std(bin_magnitudes, axis=1)
+    else:
+        import pandas as pd
 
-    bin_differences = np.diff(bin_magnitudes)
-    avg_differences = np.mean(bin_differences, axis=1)
-    std_differences = np.std(bin_differences, axis=1)
+        max_magnitudes = np.max(bin_magnitudes, axis=1)
+        min_magnitudes = np.min(bin_magnitudes, axis=1)
+        std_magnitudes = np.std(bin_magnitudes, axis=1)
 
-    data = np.concatenate(([bins], [max_magnitudes], [min_magnitudes], [avg_magnitudes], [std_magnitudes], [avg_differences], [std_differences]), axis=0)
-    return data.T
+        bin_differences = np.diff(bin_magnitudes)
+        avg_differences = np.mean(bin_differences, axis=1)
+        std_differences = np.std(bin_differences, axis=1)
+
+        data = np.concatenate(([bins], [max_magnitudes], [min_magnitudes], [avg_magnitudes], [std_magnitudes], [avg_differences], [std_differences]), axis=0)
+        df = pd.DataFrame(data.T,
+                          columns=['frequency_bin', 'max_magnitude', 'min_magnitude', 'avg_magnitude', 'sd_magnitude',
+                                   'avg_difference', 'sd_difference'])
+        df.sort_values('avg_magnitude', inplace=True, ascending=False, ignore_index=True)
+
+        return df
