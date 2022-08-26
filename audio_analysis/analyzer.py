@@ -46,4 +46,4 @@ def get_note_data(note, n_bins, for_ML=False) -> np.ndarray:
     std_differences = np.std(bin_differences, axis=1)
 
     data = np.concatenate(([bins], [max_magnitudes], [min_magnitudes], [avg_magnitudes], [std_magnitudes], [avg_differences], [std_differences]), axis=0)
-    return data
+    return data.T
