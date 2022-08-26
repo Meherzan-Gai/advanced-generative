@@ -28,3 +28,10 @@ For example, if one chord contains an E and a G, and the next chord in the progr
     
 6. Adjacent chords must share all but 6 pitches (only applicable when num notes is 6)
     1. Example: If the current chord is C11 (C, E, G, B flat, D, F), then the next chord must not have a C, E, G, B flat, D, or F in it.
+
+
+## How to Input:
+
+1.  Input integer values corresponding to the number of pitches shared between chords (0-5)
+    1. Example: If you want chords to share 2 notes you would input, "2"
+    2. WARNING: The SharedTone value should not be higher or equal to the value of NumNotes or else no progressions will be generated that fit these rules

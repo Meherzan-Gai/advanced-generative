@@ -22,3 +22,7 @@
 5. Each chord contains 6 unique notes
     1. Example C11 (C, E, G, B flat, D, F)
 
+## How to Input:
+
+1.  Input integer values corresponding to the number of notes you want in each chord (from 2 - 6)
+    1. Example: If you want 3 notes you would input, "3"

@@ -14,3 +14,8 @@
 
 2. (OFF): Starting chords do not have to have the pitch in the bass note of the chord
     1. All chords are allowed with this setting
+
+## How to Input:
+
+1.  Input a boolean value corresponding to whether you want the rule on or off
+    1. Example: If you want all starting chords to have the input pitch in the bass note of the chord then you would input, "true"

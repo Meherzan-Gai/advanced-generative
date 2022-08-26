@@ -23,3 +23,12 @@
     
 4. Chords can be made out of all types of intervals
     1. All chord intervals are acceptable with this level
+
+
+## How to Input:
+
+1.  Input boolean values in a list corresponding to each interval in an interval vector.
+    1. An interval vector is a list of the intervals that make up a chord
+    2. It has six types of intervals that make it up
+        1. [Minor 2nd/Major 7th, Major 2nd/Minor 7th, Minor 3rd/Major 6th, Major 3rd/Minor 6th, Perfect 4th/Perfect 5th, Tritone] in that order
+    3. Example: If you want Minor 3rds, Major 3rds, and Perfect 4ths you would input the following: [false,false,true,true,true,false]

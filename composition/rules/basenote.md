@@ -16,3 +16,8 @@
         1. However an E minor chord in first inversion [G, B, E] cannot come after a C major chord as C to G is more than 4 semitones
 3. Bassline can move a maximum of an octave
     1. All chords are allowed with this rule (provided they are in the proper octave)
+
+## How to Input:
+
+1.  Input integer values corresponding to the levels detailed above
+    1. Example: If you want the bassline to only move in steps you would input, "1" corresponding to level 1
