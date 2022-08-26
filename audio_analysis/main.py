@@ -14,13 +14,11 @@ def determine_pitches(melody, freq_range) -> np.ndarray:
     return librosa.hz_to_midi(freq_range[result])
 
 
-def determine_pitches_ML(melody_data):
+def determine_pitches_ML(melody_data) -> np.ndarray:
     pass
 
 
-# if for_ML is true, it should build the full note_data df
-# should
-def analyze_audio_file(path, n_fft=2048, for_ML=False):
+def analyze_audio_file(path, n_fft=2048, for_ML=False) -> np.ndarray:
     S, freq_range, onsets = analyzer.get_audio_info(path, n_fft=n_fft)
 
     melody_data = []

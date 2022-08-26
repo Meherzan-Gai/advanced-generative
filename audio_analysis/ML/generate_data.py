@@ -17,8 +17,8 @@ def generate_data(note_data) -> pd.DataFrame:
 
 if __name__ == '__main__':
     ML_dir = os.path.abspath(os.curdir)
-    UPKW_file = f'{ML_dir}/UprightPianoKW_notes.csv'
-    mp3_file = f'{ML_dir}/mp3_notes.csv'
+    UPKW_file = f'{ML_dir}/note_data/UprightPianoKW_notes.csv'
+    mp3_file = f'{ML_dir}/note_data/mp3_notes.csv'
 
     UPKW_df = pd.read_csv(UPKW_file, header=0)
     mp3_df = pd.read_csv(mp3_file, header=0)
@@ -26,4 +26,4 @@ if __name__ == '__main__':
     combined_df = pd.concat([UPKW_df, mp3_df], ignore_index=True).iloc[:, 1:]
 
     working_df = generate_data(combined_df)
-    working_df.to_csv(path_or_buf=f'{ML_dir}/sdv_notes.csv', index=False)
+    working_df.to_csv(path_or_buf=f'{ML_dir}/note_data/sdv_notes.csv', index=False)

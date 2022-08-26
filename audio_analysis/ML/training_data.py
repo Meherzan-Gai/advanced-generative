@@ -50,4 +50,4 @@ if __name__ == '__main__':
     files = os.listdir(samples_path)
 
     data = format_train_data(samples_path, n_bins_per_sample=10)
-    data.to_csv(path_or_buf=f'{ML_dir}/mp3_notes.csv', index=False)
+    data.to_csv(path_or_buf=f'{ML_dir}/note_data/mp3_notes.csv', index=False)

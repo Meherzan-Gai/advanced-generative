@@ -42,8 +42,8 @@ def create_model(input_data: pd.DataFrame, use_fake_data=False, fake_data: pd.Da
 if __name__ == '__main__':
     ML_dir = os.path.abspath(os.curdir)
 
-    notes_df = pd.read_csv(f'{ML_dir}/UPKW+mp3_notes.csv', header=0)
-    sdv_notes_df = pd.read_csv(f'{ML_dir}/sdv_notes.csv', header=0)
+    notes_df = pd.read_csv(f'{ML_dir}/note_data/UPKW+mp3_notes.csv', header=0)
+    sdv_notes_df = pd.read_csv(f'{ML_dir}/note_data/sdv_notes.csv', header=0)
 
     m = create_model(notes_df, use_fake_data=True, fake_data=sdv_notes_df)
 
