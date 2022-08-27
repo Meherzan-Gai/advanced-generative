@@ -31,11 +31,10 @@ def arrProgression(progression,melody):
 
 
 if __name__ == "__main__":
-    Path('/app/output.mid').touch(exist_ok=True)
-    # outputFile = Player('/app/output.mid')
+    Path('output.mid').touch(exist_ok=True)
+    outputFile = Player('generative-music/output.mid')
 
-    # with open('test.json', 'r') as melodyFile:
-    with open('/app/midi_melodies/melody.json', 'r') as melodyFile:
+    with open('midi_melodies/melody.json', 'r') as melodyFile:
         melodyData = json.load(melodyFile)
         melody = melodyData
         
@@ -61,7 +60,7 @@ if __name__ == "__main__":
     print()
     print()
     if (len(composer.progressions) > 0):
-        # player = Player("composition/player.mid")
+        player = Player("composition/player.mid")
         voicer = Voicing()
         programQuit = False
         while (programQuit == False):
@@ -81,9 +80,9 @@ if __name__ == "__main__":
                             progressionChosen = composer.progressions[hearOption-1]
                             melodyIn = melody[:]
                             arrProgression(progressionChosen,melodyIn)
-                            # player.writeMusic(voicer.progression, melodyIn)
+                            player.writeMusic(voicer.progression, melodyIn)
                             print(voicer.progression)
-                            # player.playMusic()
+                            player.playMusic()
 
                             progressionQuit = False
                             while(progressionQuit == False):
@@ -93,16 +92,16 @@ if __name__ == "__main__":
                                     if (progressionOption == 1):
                                         print()
                                         print("Progression downloading...")
-                                        # outputFile.writeMusic(voicer.progression,melodyIn)
+                                        outputFile.writeMusic(voicer.progression,melodyIn)
                                         print()
                                         print("Progression downloaded")
                                         print()
                                     
                                     elif (progressionOption == 2):
                                         voicer.progression.octaveUp()
-                                        # player.writeMusic(voicer.progression, melodyIn)
+                                        player.writeMusic(voicer.progression, melodyIn)
                                         print(voicer.progression)
-                                        # player.playMusic()
+                                        player.playMusic()
 
                                     elif (progressionOption == 3):
                                         voicer.progression.octaveUp()
@@ -112,15 +111,15 @@ if __name__ == "__main__":
                                                 print("Warning: One or more notes in the melody is above the maximum pitch value of 127 and has been resolved to 127")
                                                 print()
                                                 melodyIn[noteIdx]=127
-                                        # player.writeMusic(voicer.progression, melodyIn)
+                                        player.writeMusic(voicer.progression, melodyIn)
                                         print(voicer.progression)
-                                        # player.playMusic()    
+                                        player.playMusic()    
                                     
                                     elif (progressionOption == 4):
                                         voicer.progression.octaveDown()
-                                        # player.writeMusic(voicer.progression, melodyIn)
+                                        player.writeMusic(voicer.progression, melodyIn)
                                         print(voicer.progression)
-                                        # player.playMusic()
+                                        player.playMusic()
 
                                     elif (progressionOption == 5):
                                         voicer.progression.octaveDown()
@@ -130,9 +129,9 @@ if __name__ == "__main__":
                                                 print("Warning: One or more notes in the melody is below the minimum pitch value of 0 and has been resolved to 0")
                                                 print()
                                                 melodyIn[noteIdx]=0
-                                        # player.writeMusic(voicer.progression, melodyIn)
+                                        player.writeMusic(voicer.progression, melodyIn)
                                         print(voicer.progression)
-                                        # player.playMusic()
+                                        player.playMusic()
 
                                     elif (progressionOption == 6):
                                         progressionQuit = True
