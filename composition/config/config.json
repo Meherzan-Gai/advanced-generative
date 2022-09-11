@@ -1,0 +1,40 @@
+{
+    "Input" : {
+        "melody" : [60, 63, 67, 68, 67, 60, 59],
+        "key" : "C:min"
+    },
+
+    "Settings" : {
+        "maxRetries" : 10,
+        "maxChords" : 10
+    },
+
+    "SharedTone" : {
+        "options" : [0,1,2,3,4,5],
+        "numShared" : 2,
+        "priority" : 3
+
+    },
+
+    "NumNotes" : {
+        "numNotes" : 3,
+        "priority" : 1
+
+    },
+
+    "Interval" : {
+        "intervals":[false,false,true,true,true,true],
+        "priority" : 2
+
+    },
+
+    "FirstChord" : {
+        "ruleOn" : false,
+        "priority" : 4
+    },
+
+    "BaseNote" : {
+        "level" : 2,
+        "priority" : 5
+    }
+}

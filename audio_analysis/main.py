@@ -58,13 +58,16 @@ if __name__ == '__main__':
     import os.path
 
     PROJECT_ROOT = os.path.dirname(os.path.abspath(os.curdir))
+    print(PROJECT_ROOT)
 
-    filepath = f'{PROJECT_ROOT}/audio_files/test_audio/test_piano_old.wav'
+    filepath = f'/app/audio_files/test_audio/test_piano_old.wav'
+    # filepath = f'{PROJECT_ROOT}/audio_files/test_audio/test_piano_old.wav'
 
-    for_ML = True
+    for_ML = False
 
     model_name = '20220826-164627'
-    model_path = f'{PROJECT_ROOT}/audio_analysis/ML/models/{model_name}_rfr_model.pkl'
+    # model_path = f'{PROJECT_ROOT}/audio_analysis/ML/models/{model_name}_rfr_model.pkl'
+    model_path = f'/app/audio_analysis/ML/models/{model_name}_rfr_model.pkl'
 
     with open(model_path, 'rb') as f:
         model = pickle.load(f)
@@ -74,5 +77,7 @@ if __name__ == '__main__':
     print(librosa.midi_to_note(m))
 
     timestr = time.strftime("%Y%m%d-%H%M%S")
-    with open(f'{PROJECT_ROOT}/midi_melodies/{timestr}_{os.path.basename(filepath)}.json', 'w') as out:
+    # with open(f'{PROJECT_ROOT}/midi_melodies/{timestr}_{os.path.basename(filepath)}.json', 'w') as out:
+    # with open(f'/app/midi_melodies/{timestr}_{os.path.basename(filepath)}.json', 'w') as out:
+    with open(f'/app/midi_melodies/melody.json', 'w') as out:
         json.dump(m, out)
