@@ -17,6 +17,7 @@ class Player:
 
 
     def writeMusic(self,progression,pitches):
+        print("HI")
         midiPlayer = MIDIFile(
             numTracks = 1,
             removeDuplicates=True,
@@ -78,7 +79,15 @@ class Player:
 
 '''
 CODE TO TEST THAT MIDI WAS WRITTEN AND PLAYED
-
+midiPlayer = MIDIFile(
+            numTracks = 1,
+            removeDuplicates=True,
+            deinterleave=True,
+            adjust_origin=False,
+            file_format = 1,
+            ticks_per_quarternote = MidiFile.TICKSPERQUARTERNOTE,
+            eventtime_is_ticks=False
+        )
 track = 0
 channel = 0
 pitch = 60
@@ -105,6 +114,6 @@ midiPlayer.addNote(track,channel,pitch,time,duration,volume)
 with open("composition/player.mid", 'wb') as output_File:
         midiPlayer.writeFile(output_File)
 
-playMusic('composition/player.mid')
+pygame.playMusic('composition/player.mid')
 
 '''

@@ -17,7 +17,7 @@ class Composer:
 
     #generate chord progression function
     def makeChordProgression(self):  
-        print(self.retriesOn)      
+        #print(self.retriesOn)      
         pitchIdx = 0
         activeProgressions = []
         while pitchIdx < len(self.pitches):
@@ -76,10 +76,10 @@ class Composer:
                         retries = retryCounter
                     )
                     if (len(workingProgressions)==0):
-                        print("NO PROGRESSIONS FOUND")
-                        print()
-                        print("RETRYING")
-                        print()
+                        #print("NO PROGRESSIONS FOUND")
+                        #print()
+                        #print("RETRYING")
+                        #print()
                         retryCounter-=1
                         nextProgressions=[]
                         for rule in self.rules:
@@ -94,7 +94,7 @@ class Composer:
                                 for chord in possibleChords:
                                     for progression in activeProgressions: #GET RID OF THIS LINE TO GO BACK TO OLD VERSION
                                         nextProgressions.append(progression.appendChord(chord))
-                                    print("Appending this chord in retries. " + str(retryCounter) + "retry counter. "+ str(chord))
+                                    #print("Appending this chord in retries. " + str(retryCounter) + "retry counter. "+ str(chord))
                 activeProgressions=workingProgressions
             else:
                 activeProgressions = Rule.trimProgressions(

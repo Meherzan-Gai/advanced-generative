@@ -80,7 +80,7 @@ class Rule(object):
                     if (chordWorks.count(False)==0):
                         workingProgressions.append(progression)
                 
-        print(len(workingProgressions))
+        #print(len(workingProgressions))
         return workingProgressions
             
 

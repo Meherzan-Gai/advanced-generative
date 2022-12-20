@@ -32,16 +32,17 @@ def arrProgression(progression,melody):
 
 if __name__ == "__main__":
     Path('output.mid').touch(exist_ok=True)
-    outputFile = Player('generative-music/output.mid')
+    outputFile = Player('/Users/gaim/Documents/Git/advanced-generative/output.mid')
 
-    with open('midi_melodies/melody.json', 'r') as melodyFile:
-        melodyData = json.load(melodyFile)
-        melody = melodyData
+    #with open('midi_melodies/melody.json', 'r') as melodyFile:
+    #    melodyData = json.load(melodyFile)
+    #    melody = melodyData
         
     with open('composition/config/config.json', 'r') as inputFile:
         ruleData = json.load(inputFile)
         key = ruleData.get("Input").get("key")
         Chord.setKey(key)
+        melody = ruleData.get("Input").get("melody")
         maxRetries = ruleData.get("Settings").get("maxRetries")
         maxChords = ruleData.get("Settings").get("maxChords")
         rule2 = NumNotes(ruleData.get("NumNotes").get("priority"),ruleData.get("NumNotes").get("numNotes"))
@@ -55,12 +56,16 @@ if __name__ == "__main__":
 
     composer = Composer(melody, ruleList, maxChords, maxRetries)
     composer.makeChordProgression()
+    print()
+    print()
+    print("PROGRESSIONS GENERATED")
+    print()
     composer.printProgressions()
     print(len(composer.progressions),"progressions generated")
     print()
     print()
     if (len(composer.progressions) > 0):
-        player = Player("composition/player.mid")
+        player = Player('/Users/gaim/Documents/Git/advanced-generative/player.mid')
         voicer = Voicing()
         programQuit = False
         while (programQuit == False):

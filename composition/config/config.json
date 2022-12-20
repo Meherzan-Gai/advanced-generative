@@ -1,12 +1,12 @@
 {
     "Input" : {
-        "melody" : [60, 63, 67, 68, 67, 60, 59],
-        "key" : "C:min"
+        "melody" : [67, 65, 62, 67, 60, 58],
+        "key" : "Bb:maj"
     },
 
     "Settings" : {
-        "maxRetries" : 10,
-        "maxChords" : 10
+        "maxRetries" : 20,
+        "maxChords" : 20
     },
 
     "SharedTone" : {
@@ -23,7 +23,7 @@
     },
 
     "Interval" : {
-        "intervals":[false,false,true,true,true,true],
+        "intervals":[false,false,true,true,true,false],
         "priority" : 2
 
     },
